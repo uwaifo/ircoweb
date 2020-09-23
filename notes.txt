@@ -1,0 +1,45 @@
+GRAPHQL QUERIES
+
+STATES
+mutation createAState {
+  createStates(input: {
+    name: "Louisiana", 
+    abbreviation: "KY"}) {
+    id
+    name
+    abbreviation
+  }
+}
+//
+query MyQuery {
+  listStatess {
+    nextToken
+    items {
+      id
+      name
+    }
+  }
+}
+
+
+
+///////
+
+add_assessment_question(
+    question_statement:"which of these is not a noun?", 
+    assessment_id:"5eabe3ac608cb65aff5ddd1e", 
+    answer_options:[
+        {option_statement:"Man", is_correct:false},
+        {option_statement:"Happiness", is_correct:false},
+        {option_statement:"Orange", is_correct:false},
+        {option_statement:"jump", is_correct:false}
+        ]){
+    question{
+      question_statement
+    }
+  }
+}
+///
+
+
+{"response_code":0,"results":[{"category":"General Knowledge","type":"multiple","difficulty":"easy","question":"Which of these colours is NOT featured in the logo for Google?","correct_answer":"Pink","incorrect_answers":["Yellow","Blue","Green"]},{"category":"Science: Computers","type":"multiple","difficulty":"easy","question":"On Twitter, what is the character limit for a Tweet?","correct_answer":"140","incorrect_answers":["120","160","100"]},{"category":"Entertainment: Music","type":"multiple","difficulty":"hard","question":"&quot;All the Boys&quot; by Panic! At the Disco was released as a bonus track on what album?","correct_answer":"Too Weird To Live, Too Rare To Die!","incorrect_answers":["A Fever You Can&#039;t Sweat Out","Death Of A Bachelor","Vices &amp; Virtues"]},{"category":"Animals","type":"multiple","difficulty":"easy","question":"Which class of animals are newts members of?","correct_answer":"Amphibian","incorrect_answers":["Fish","Reptiles","Mammals"]},{"category":"Geography","type":"multiple","difficulty":"hard","question":"What is the name of the formerly rich fishing grounds off the island of Newfoundland, Canada?","correct_answer":"Grand Banks","incorrect_answers":["Great Barrier Reef","Mariana Trench","Hudson Bay"]},{"category":"Entertainment: Television","type":"multiple","difficulty":"medium","question":"In which year did the British television series &quot;The Bill&quot; end?","correct_answer":"2010","incorrect_answers":["2001","2007","2012"]},{"category":"Science: Mathematics","type":"multiple","difficulty":"easy","question":"What is the symbol for Displacement?","correct_answer":"&Delta;r","incorrect_answers":["dr","Dp","r"]},{"category":"General Knowledge","type":"multiple","difficulty":"medium","question":"Earl Grey tea is black tea flavoured with what?","correct_answer":"Bergamot oil","incorrect_answers":["Lavender","Vanilla","Honey"]},{"category":"Entertainment: Board Games","type":"multiple","difficulty":"medium","question":"Europa Universalis is a strategy video game based on which French board game?","correct_answer":"Europa Universalis","incorrect_answers":["Europe and the Universe","Europa!","Power in Europe"]},{"category":"Entertainment: Video Games","type":"multiple","difficulty":"hard","question":"What Touhou Project character&#039;s first ever appearance was as a midboss in the eighth game, Imperishable Night?","correct_answer":"Tewi Inaba","incorrect_answers":["Mystia Lorelei","Kaguya Houraisan","Rumia"]}]}

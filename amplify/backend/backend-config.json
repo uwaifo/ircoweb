@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "ircocom48fc1d0e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

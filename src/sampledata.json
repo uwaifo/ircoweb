@@ -1,0 +1,63 @@
+{
+    "data": {
+      "listSurveyQuestions": {
+        "items": [
+          {
+            "id": "c713a8e3-adb1-4f79-93f7-e663de5c99ce",
+            "questionText": "Which of these colours is NOT featured in the logo for Google?",
+            "questionType": "MULTIPLE_CHOICE"
+          },
+          {
+            "id": "8311ddd8-86b6-4eb7-a814-319b62e9dbc5",
+            "questionText": "Nutella is produced by the German company Ferrero.",
+            "questionType": "SINGLE_CHOICE"
+          },
+          {
+            "id": "f68a68c9-2064-42cc-9ce8-2cc56893241d",
+            "questionText": "In one sentence tell us what type of care y9ou expect to revieve.",
+            "questionType": "TEXT_INPUT"
+          },
+          {
+            "id": "b3fb9e03-d6bc-4c56-b878-ef5604948997",
+            "questionText": "Europa Universalis is a strategy video game based on which French board game?",
+            "questionType": "MULTIPLE_CHOICE"
+          },
+          {
+            "id": "0fb98dfb-ebdf-4714-8f89-4d3f927277d2",
+            "questionText": "How many colors are in the Nigerian Flag?",
+            "questionType": "NUMBER_RANGE"
+          },
+          {
+            "id": "59ece9c9-e52f-4580-85a4-be97d873af26",
+            "questionText": "Do you have any history of ailments associated with aging ?",
+            "questionType": "TEXT_INPUT"
+          },
+          {
+            "id": "6214372b-96aa-4ec5-b2ec-a160ddd43a61",
+            "questionText": "The color orange is named after the fruit.",
+            "questionType": "SINGLE_CHOICE"
+          },
+          {
+            "id": "0f936af1-d694-468c-b3d4-852243e69ded",
+            "questionText": "Which class of animals are newts members of?",
+            "questionType": "MULTIPLE_CHOICE"
+          },
+          {
+            "id": "8a8d7ed6-6a62-4369-ba11-b432ef46fd24",
+            "questionText": "It is automatically considered entrapment in the United States if the police sell you illegal substances without revealing themselves.",
+            "questionType": "SINGLE_CHOICE"
+          },
+          {
+            "id": "2f1f8324-84d3-4ce0-8a2e-05cfd27cbbaf",
+            "questionText": "French is an official language in Canada.",
+            "questionType": "SINGLE_CHOICE"
+          },
+          {
+            "id": "bcd3d761-d8b1-4c67-baf3-99a63ecd28af",
+            "questionText": "Tell me about yourself",
+            "questionType": "TEXT_INPUT"
+          }
+        ]
+      }
+    }
+  }

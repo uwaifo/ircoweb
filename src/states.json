@@ -1,0 +1,94 @@
+{
+  "data": {
+    "listStatess": {
+      "nextToken": null,
+      "items": [
+        {
+          "id": "cccee1f7-6d9e-461a-9327-0bf526784a95",
+          "name": "Kentucky",
+          "createdAt": "2020-09-20T08:56:32.589Z"
+        },
+        {
+          "id": "63123fb5-f710-4647-9274-57e6d1a08517",
+          "name": "Gorgia",
+          "createdAt": "2020-09-20T08:50:16.974Z"
+        },
+        {
+          "id": "0d178071-4459-4d96-add7-bee89e1a45b4",
+          "name": "Arkansas",
+          "createdAt": "2020-09-20T08:46:52.408Z"
+        },
+        {
+          "id": "8c8a5bd8-07e0-4583-b797-4a5d223e7786",
+          "name": "Illinois",
+          "createdAt": "2020-09-20T08:55:03.485Z"
+        },
+        {
+          "id": "b32e3f93-1823-41f6-b197-b9a1fa2d41b9",
+          "name": "Delaware",
+          "createdAt": "2020-09-20T08:49:41.626Z"
+        },
+        {
+          "id": "7488686b-392a-42c0-a689-c641cc87ef2b",
+          "name": "Arizona",
+          "createdAt": "2020-09-20T08:46:30.146Z"
+        },
+        {
+          "id": "8f4ccbb5-bbf4-4d35-9277-89ae85a5a629",
+          "name": "Idaho",
+          "createdAt": "2020-09-20T08:54:39.943Z"
+        },
+        {
+          "id": "5ba4e371-465f-4cc6-b5a2-d7c9e9eb7611",
+          "name": "Iowa",
+          "createdAt": "2020-09-20T08:55:40.676Z"
+        },
+        {
+          "id": "328a8353-06e6-4b97-80b3-6111532f7270",
+          "name": "Hawaii",
+          "createdAt": "2020-09-20T08:54:15.188Z"
+        },
+        {
+          "id": "d4fe0731-1724-4db4-bcc9-22d38bc5560d",
+          "name": "Kansas",
+          "createdAt": "2020-09-20T08:56:08.222Z"
+        },
+        {
+          "id": "52664c2e-1d41-4d0a-a92b-c8eb7a5f7f09",
+          "name": "California",
+          "createdAt": "2020-09-20T08:47:11.303Z"
+        },
+        {
+          "id": "0271d218-7ca4-4b45-a6a5-408b7395d4b8",
+          "name": "Louisiana",
+          "createdAt": "2020-09-20T08:56:51.604Z"
+        },
+        {
+          "id": "63b86f82-48d1-4d32-a64f-c1c47dedcd8c",
+          "name": "Indiana",
+          "createdAt": "2020-09-20T08:55:23.420Z"
+        },
+        {
+          "id": "3c729dd5-fe36-451d-8c4f-aa26b085dc27",
+          "name": "Alabama",
+          "createdAt": "2020-09-20T08:05:15.623Z"
+        },
+        {
+          "id": "4918f910-3ac1-4dca-af8f-761f94f48ab7",
+          "name": "Florida",
+          "createdAt": "2020-09-20T08:49:59.858Z"
+        },
+        {
+          "id": "a74eaaf1-33f3-41d1-99e3-db400c642a62",
+          "name": "Colorado",
+          "createdAt": "2020-09-20T08:47:30.983Z"
+        },
+        {
+          "id": "740fcea9-afae-43cc-869d-467cd560a9df",
+          "name": "Connecticut",
+          "createdAt": "2020-09-20T08:48:30.625Z"
+        }
+      ]
+    }
+  }
+}
