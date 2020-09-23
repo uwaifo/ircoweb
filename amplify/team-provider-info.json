@@ -1,20 +1,26 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-ircocom-dev-142255-authRole",
-      "UnauthRoleArn": "arn:aws:iam::294183578414:role/amplify-ircocom-dev-142255-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::294183578414:role/amplify-ircocom-dev-142255-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-ircocom-dev-142255-deployment",
-      "UnauthRoleName": "amplify-ircocom-dev-142255-unauthRole",
-      "StackName": "amplify-ircocom-dev-142255",
-      "StackId": "arn:aws:cloudformation:us-east-2:294183578414:stack/amplify-ircocom-dev-142255/e876d230-fd9f-11ea-8301-026129d75bd2",
-      "AmplifyAppId": "d3f9ztaqkni7k9"
-    },
-    "categories": {
-      "auth": {
-        "ircocom48fc1d0e": {}
-      }
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-ircocom-dev-142255-authRole",
+            "UnauthRoleArn": "arn:aws:iam::294183578414:role/amplify-ircocom-dev-142255-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::294183578414:role/amplify-ircocom-dev-142255-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-ircocom-dev-142255-deployment",
+            "UnauthRoleName": "amplify-ircocom-dev-142255-unauthRole",
+            "StackName": "amplify-ircocom-dev-142255",
+            "StackId": "arn:aws:cloudformation:us-east-2:294183578414:stack/amplify-ircocom-dev-142255/e876d230-fd9f-11ea-8301-026129d75bd2",
+            "AmplifyAppId": "d3f9ztaqkni7k9"
+        },
+        "categories": {
+            "auth": {
+                "ircocom48fc1d0e": {}
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d3f9ztaqkni7k9",
+                    "type": "cicd"
+                }
+            }
+        }
     }
-  }
 }
