@@ -13,10 +13,11 @@ import HomePage from "views/examples/HomePage";
 import LandingPage from "views/examples/LandingPage.js";
 import LoginPage from "views/examples/LoginPage";
 import ProfilePage from "views/examples/ProfilePage.js";
-import ProfilePageUpdate from "views/examples/ProfilePageUpdate.js";
+//import ProfilePageUpdate from "views/examples/ProfilePageUpdate.js";
 
 import RegisterPage from "views/examples/RegisterPage.js";
 import SurveyPage from "views/examples/SurveyPage";
+import UserSurveyPage from "views/user/UserSurveyPage";
 // pages
 import Index from "views/Index.js";
 import { UpdateProfilePage } from "views/user/UpdateProfilePage";
@@ -34,7 +35,17 @@ function App() {
           path="/community"
           render={(props) => <CommunityPage {...props} />}
         />
-        <Route path="/survey" component={SurveyPage} />
+        {/* User Routes */}
+        <Route
+          path="/user/profile"
+          render={(props) => <ProfilePage {...props} />}
+        />
+        <Route path="/user/survey" component={SurveyPage} />
+        <Route path="/user/survey/:id" component={UserSurveyPage} />
+        {/* 
+        <Route path="/update-profile" render={(props) => <UpdateProfilePage {...props} />}/>
+        <Route path="/editprofile" component={ProfilePageUpdate} />
+        */}
 
         <Route path="/index" render={(props) => <Index {...props} />} />
         <Route path="/auth" component={AuthenticationPage} />
@@ -45,9 +56,6 @@ function App() {
         <Route path="/questions" component={ListQuestions} />
 
         {/* User Routes */}
-        <Route path="/profile" render={(props) => <ProfilePage {...props} />} />
-
-        <Route path="/editprofile" component={ProfilePageUpdate} />
 
         <Route
           path="/update-profile"

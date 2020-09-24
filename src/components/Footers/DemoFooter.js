@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Auth } from "aws-amplify";
 
 // reactstrap components
 import { Row, Container } from "reactstrap";
 
 function DemoFooter() {
+  useEffect(() => {
+    checkUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const [user, setUser] = useState({});
+  async function checkUser() {
+    try {
+      const data = await Auth.currentUserPoolUser();
+      const userInfo = { username: data.username, ...data.attributes };
+      setUser(userInfo);
+      console.log("user: ", user);
+
+      //console.log("data: ", userInfo);
+      //user = userInfo;
+    } catch (err) {
+      console.log("error: ", err);
+    }
+  }
+
+  const logout = () => {
+    setUser({});
+    Auth.signOut();
+  };
   return (
     <footer className="footer footer-black footer-white">
       <Container>
@@ -14,7 +38,12 @@ function DemoFooter() {
                 <a href="/admin">Dashboard</a>
               </li>
               <li>
-                <a href="/profile">Profile</a>
+                <a onClick={logout} href="/user/profile">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href="/auth">Logout</a>
               </li>
             </ul>
           </nav>

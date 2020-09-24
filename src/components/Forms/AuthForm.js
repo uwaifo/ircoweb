@@ -1,7 +1,9 @@
 //import React from "react";
 import { Auth, Hub } from "aws-amplify";
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import { Button, Form, Input, Label } from "reactstrap";
+
 const initialFormState = {
   username: "",
   email: "",
@@ -19,6 +21,7 @@ function AuthForm() {
   useEffect(() => {
     checkUser();
     setAuthListener();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function setAuthListener() {
@@ -163,12 +166,7 @@ function AuthForm() {
           </Button>
         </div>
       )}
-      {formType === "signedIn" && (
-        <div>
-          <h1>Welcome user!</h1>
-          <Button onClick={() => Auth.signOut()}>Sign Out</Button>
-        </div>
-      )}
+      {formType === "signedIn" && <Redirect to="/user/profile" />}
     </div>
   );
 }

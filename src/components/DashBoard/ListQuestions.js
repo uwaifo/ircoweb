@@ -1,15 +1,3 @@
-import { API, graphqlOperation } from "aws-amplify";
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  CardBody,
-  Modal,
-  PopoverBody,
-  PopoverHeader,
-  UncontrolledPopover,
-  UncontrolledTooltip,
-} from "reactstrap";
 //import { listSurveyQuestions as GetQuestions } from "../../graphql/queries";
 function ListQuestions() {
   /*const [questions, getQuestions] = useState([]);

@@ -60,7 +60,7 @@ function HomePageHeader() {
             </Button>
 
             <Button
-              href="/survey"
+              href="/user/survey"
               className="btn-round"
               color="neutral"
               type="button"

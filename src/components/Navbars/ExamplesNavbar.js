@@ -95,7 +95,7 @@ function ExamplesNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/survey" tag={Link}>
+              <NavLink to="/user/survey" tag={Link}>
                 <i className="" /> Survey
               </NavLink>
             </NavItem>
