@@ -16,10 +16,13 @@ import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 
 function SurveyPage() {
+  const userApi =
+    "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
   const url =
     "https://iddqyvacj6.execute-api.us-west-1.amazonaws.com/dev/questions";
 
   const [user, setUser] = useState({});
+  const [userProfile, setUserProfile] = useState({});
   const [pendingQuestions, setQuestion] = useState([]);
 
   useEffect(() => {
@@ -36,7 +39,11 @@ function SurveyPage() {
       const data = await Auth.currentUserPoolUser();
       const userInfo = { username: data.username, ...data.attributes };
       setUser(userInfo);
-      console.log("user: ", user);
+      // console.log("user: ", user);
+
+      const response = await fetch(`${userApi}/${data.username}`);
+      const jsonResponse = await response.json();
+      setUserProfile(jsonResponse);
 
       //console.log("data: ", userInfo);
       //user = userInfo;
@@ -64,17 +71,19 @@ function SurveyPage() {
               <>
                 <Card>
                   <CardHeader>
-                    <h2 className="title">Hello {user.email} !</h2>
+                    <h2 className="title">
+                      Hello {userProfile.firstName} {userProfile.lastName} !
+                    </h2>
                     <h3 className="title">
                       Please Give Us A Moment Of Your time.
                     </h3>
                   </CardHeader>
                   <CardBody>
                     <h4 className="title">
-                      Help us server you bette by taking a survey . This we we
+                      Help us serve you better by taking a survey . This way we
                       get to know you better and do more for you.
                     </h4>
-                    <Button href="/user/survey/" color="success">
+                    <Button href="/user/session/" color="success">
                       Take Survey
                     </Button>
                   </CardBody>

@@ -35,7 +35,7 @@ function UserSurveyPage() {
               Help us server you bette by taking a survey . This we we get to
               know you better and do more for you.
             </h4>
-            <Button href="/user/survey/" color="success">
+            <Button href="/user/session/" color="success">
               Take Survey
             </Button>
           </CardBody>

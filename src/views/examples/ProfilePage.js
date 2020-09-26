@@ -1,6 +1,7 @@
 import { Auth } from "aws-amplify";
 import DemoFooter from "components/Footers/DemoFooter.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
+import CompleteProfileModal from "components/Modal/CompleteProfile";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import React, { useEffect, useState } from "react";
@@ -19,38 +20,39 @@ import {
 //import { UpdateProfilePage } from "views/user/UpdateProfilePage";
 
 function ProfilePage() {
+  const userApi =
+    "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
   useEffect(() => {
     checkUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [user, setUser] = useState({});
+  const [userProfile, setUserProfile] = useState({});
+
+  //TODO First we check that the user from Cognito
   async function checkUser() {
     try {
       const data = await Auth.currentUserPoolUser();
       const userInfo = { username: data.username, ...data.attributes };
       setUser(userInfo);
-      console.log("user: ", user);
+      //console.log("user: ", user);
 
-      //console.log("data: ", userInfo);
-      //user = userInfo;
+      const response = await fetch(`${userApi}/${data.username}`);
+      const jsonResponse = await response.json();
+      setUserProfile(jsonResponse);
+
+      //console.log("profile : ", jsonResponse);
     } catch (err) {
       console.log("error: ", err);
     }
   }
 
+  //TODO We then check that user profile data from the db/api
+
   const logout = () => {
     setUser({});
     Auth.signOut();
   };
-  //const [activeTab, setActiveTab] = React.useState("1");
-
-  /*
-  const toggle = (tab) => {
-    if (activeTab !== tab) {
-      setActiveTab(tab);
-    }
-  };
-  */
 
   document.documentElement.classList.remove("nav-open");
   React.useEffect(() => {
@@ -64,6 +66,15 @@ function ProfilePage() {
       <ExamplesNavbar />
       <ProfilePageHeader />
       <div className="section profile-content">
+        {(function() {
+          if (userProfile.profileStatus === false) {
+            return (
+              <>
+                <CompleteProfileModal />
+              </>
+            );
+          }
+        })()}
         <Container>
           <div className="owner">
             {(function() {
@@ -80,20 +91,14 @@ function ProfilePage() {
                       </div>
                       <div className="name">
                         <h4 className="title">
-                          Jane Faker {user.username} <br />
+                          {userProfile.firstName} {userProfile.lastName} <br />
                         </h4>
-                        <h6 className="description">Music Producer</h6>
+                        <h6 className="description">{userProfile.email}</h6>
                       </div>
                     </div>
                     <Row>
                       <Col className="ml-auto mr-auto text-center" md="6">
-                        <p>
-                          An artist of considerable range, Jane Faker — the name
-                          taken by Melbourne-raised, Brooklyn-based Nick Murphy
-                          — writes, performs and records all of his own music,
-                          giving it a warm, intimate feel with a solid groove
-                          structure.
-                        </p>
+                        <p>Address Information</p>
                         <br />
                         <Button
                           href="/editprofile"

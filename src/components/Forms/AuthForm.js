@@ -1,9 +1,10 @@
 //import React from "react";
 import { Auth, Hub } from "aws-amplify";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { Button, Form, Input, Label } from "reactstrap";
-
+const url = "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
 const initialFormState = {
   username: "",
   email: "",
@@ -13,7 +14,6 @@ const initialFormState = {
   formType: "signUp",
 };
 function AuthForm() {
-  //TODO 2. PREP SOME STATE OBJECT
   const [formState, updateFormState] = useState(initialFormState);
 
   const [user, updateUser] = useState(null);
@@ -74,11 +74,16 @@ function AuthForm() {
   async function confirmSignUp() {
     const { email, authCodeLink } = formState;
     await Auth.confirmSignUp(email, authCodeLink);
+    //maybe here we create in db
+
     updateFormState(() => ({ ...formState, formType: "signIn" }));
+    //New user lambda should be called at this point
   }
+
   async function signIn() {
     const { email, password } = formState;
     await Auth.signIn(email, password);
+
     updateFormState(() => ({ ...formState, formType: "signedIn" }));
   }
   async function signedIn() {}

@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "ircocom48fc1d0e_identitypool_48fc1d0e",
+    "identityPoolName": "ircocom60e2ad3e_identitypool_60e2ad3e",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ircoco48fc1d0e",
-    "userPoolName": "ircocom48fc1d0e_userpool_48fc1d0e",
+    "resourceNameTruncated": "ircoco60e2ad3e",
+    "userPoolName": "ircocom60e2ad3e_userpool_60e2ad3e",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "ircoco48fc1d0e_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "ircoco60e2ad3e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "48fc1d0e",
-    "resourceName": "ircocom48fc1d0e",
+    "sharedId": "60e2ad3e",
+    "resourceName": "ircocom60e2ad3e",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

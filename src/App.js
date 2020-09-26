@@ -18,6 +18,8 @@ import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import SurveyPage from "views/examples/SurveyPage";
 import UserSurveyPage from "views/user/UserSurveyPage";
+import SurveySession from "components/Forms/SurveySession";
+import SurveyFeed from "components/Forms/SurveyFeed";
 // pages
 import Index from "views/Index.js";
 import { UpdateProfilePage } from "views/user/UpdateProfilePage";
@@ -41,7 +43,9 @@ function App() {
           render={(props) => <ProfilePage {...props} />}
         />
         <Route path="/user/survey" component={SurveyPage} />
+        <Route path="/user/session" component={SurveySession} />
         <Route path="/user/survey/:id" component={UserSurveyPage} />
+        <Route path="/user/test/:id" component={SurveyFeed} />
         {/* 
         <Route path="/update-profile" render={(props) => <UpdateProfilePage {...props} />}/>
         <Route path="/editprofile" component={ProfilePageUpdate} />
@@ -80,6 +84,7 @@ function App() {
 export default App;
 //cpl45198@eoopy.com
 //vut92780@eoopy.com
+//http://ircocom-20200923151711-hostingbucket-dev.s3-website.us-east-2.amazonaws.com/
 
 /*
 {

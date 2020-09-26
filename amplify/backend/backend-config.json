@@ -1,6 +1,6 @@
 {
   "auth": {
-    "ircocom48fc1d0e": {
+    "ircocom60e2ad3e": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,10 +8,6 @@
     }
   },
   "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd"
-    },
     "S3AndCloudFront": {
       "service": "S3AndCloudFront",
       "providerPlugin": "awscloudformation"
