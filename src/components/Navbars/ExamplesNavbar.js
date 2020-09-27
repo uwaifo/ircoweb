@@ -59,7 +59,13 @@ function ExamplesNavbar() {
             title="Coded by Creative Tim"
             //tag={Link}
           >
-            IRCO Florida
+            <img
+              alt="..."
+              width="150"
+              height="75fy push"
+              //className="img-circle img-no-padding img-responsive"
+              src={require("assets/img/logo/logo.png")}
+            />
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
