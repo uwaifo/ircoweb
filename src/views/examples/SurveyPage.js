@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardImg,
   CardTitle,
   CardText,
   CardHeader,
@@ -14,6 +13,7 @@ import { Auth } from "aws-amplify";
 import DemoFooter from "components/Footers/DemoFooter.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import { Link } from "react-router-dom";
 
 function SurveyPage() {
   const userApi =
@@ -94,7 +94,6 @@ function SurveyPage() {
             return (
               <>
                 <Card>
-                  <CardImg top src="img-src" alt="..." />
                   <CardBody>
                     <CardTitle>
                       {" "}
@@ -104,9 +103,9 @@ function SurveyPage() {
                       Some quick example text to build on the card title and
                       make up the bulk of the card's content.
                     </CardText>
-                    <Button href="/auth" color="primary">
-                      Register an account
-                    </Button>
+                    <Link to="/auth">
+                      <Button color="primary">Sign into your account</Button>
+                    </Link>
                   </CardBody>
                 </Card>
               </>

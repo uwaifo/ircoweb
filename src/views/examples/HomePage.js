@@ -1,8 +1,8 @@
+import React from "react";
 import DemoFooter from "components/Footers/DemoFooter.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import React from "react";
 
 function HomePage() {
   document.documentElement.classList.remove("nav-open");
@@ -16,7 +16,7 @@ function HomePage() {
     <>
       <ExamplesNavbar />
       <HomePageHeader />
-      <div className="main">Content Here</div>
+      <div className="main"></div>
       <DemoFooter />
     </>
   );

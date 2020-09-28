@@ -29,8 +29,6 @@ function AuthenticationPage() {
           <Row>
             <Col className="ml-auto mr-auto" lg="4">
               <Card className="card-register ml-auto mr-auto">
-                <h3 className="title mx-auto">Register </h3>
-
                 <AuthForm />
               </Card>
             </Col>

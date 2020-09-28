@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import { Auth } from "aws-amplify";
 
 // reactstrap components
@@ -35,23 +37,19 @@ function DemoFooter() {
           <nav className="footer-nav">
             <ul>
               <li>
-                <a href="/admin">Dashboard</a>
+                <Link to="/user/profile">Profile</Link>
               </li>
               <li>
-                <a onClick={logout} href="/user/profile">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a href="/auth">Logout</a>
+                <Link to="/auth" onClick={logout}>
+                  Logout
+                </Link>
               </li>
             </ul>
           </nav>
           <div className="credits ml-auto">
             <span className="copyright">
               © {new Date().getFullYear()}, made with{" "}
-              <i className="fa fa-heart heart" /> by Creative Tim & Uwaifo
-              Idehenre
+              <i className="fa fa-heart heart" />
             </span>
           </div>
         </Row>

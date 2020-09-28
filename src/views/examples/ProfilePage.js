@@ -5,11 +5,11 @@ import CompleteProfileModal from "components/Modal/CompleteProfile";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
   CardBody,
-  CardImg,
   CardText,
   CardTitle,
   Col,
@@ -126,7 +126,6 @@ function ProfilePage() {
                 return (
                   <>
                     <Card>
-                      <CardImg top src="img-src" alt="..." />
                       <CardBody>
                         <CardTitle>
                           {" "}
@@ -138,9 +137,12 @@ function ProfilePage() {
                           Some quick example text to build on the card title and
                           make up the bulk of the card's content.
                         </CardText>
-                        <Button href="/auth" color="primary">
-                          Register an account
-                        </Button>
+
+                        <Link to="/auth">
+                          <Button color="primary">
+                            Sign into your account
+                          </Button>
+                        </Link>
                       </CardBody>
                     </Card>
                   </>

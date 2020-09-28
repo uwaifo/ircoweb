@@ -1,35 +1,36 @@
-import React, { useState } from "react";
 import { Auth } from "aws-amplify";
-import { GetCurrentUser } from "../../helpers/getCurrentUser";
+import axios from "axios";
+import React, { useState } from "react";
 import {
   Button,
   Col,
   Container,
   Form,
-  FormGroup,
   Input,
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Label,
   Row,
 } from "reactstrap";
-import axios from "axios";
 
 export const UpdateProfilePage = () => {
-  let today = new Date();
-  today = today.toLocaleDateString();
+  //let today = new Date();
+  //today = today.toLocaleDateString();
   const initialProfile = {
     firstName: "",
     lastName: "",
-    address: "",
+    address: {
+      street: "",
+      city: "",
+      state: "",
+    },
+
     phoneNumber: "",
     phoneType: "",
-    city: "",
-    state: "",
   };
   const [userProfile, setUserProfile] = useState(initialProfile);
-  const [submitted, setSubmitted] = useState(false);
+  //const [address, setAddress] = useState(initialProfile.address);
+  //const [submitted, setSubmitted] = useState(false);
 
   /*async function getUser() {
     try {
@@ -47,6 +48,16 @@ export const UpdateProfilePage = () => {
 
       console.log(updateUrl);
       const updateResponse = await axios.patch(updateUrl, userProfile);
+      /*const updateResponse = await axios({
+        method: "PATCH",
+        url: updateUrl,
+        data: userProfile,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+      });
+      */
       //const jsonUpdateResponse = await updateResponse.json();
       console.log(updateResponse);
     } catch (error) {
@@ -56,9 +67,45 @@ export const UpdateProfilePage = () => {
 
   function onChange(e) {
     e.persist();
-    setUserProfile(() => ({ ...userProfile, [e.target.name]: e.target.value }));
+
+    if (
+      e.target.name === "state" ||
+      e.target.name === "city" ||
+      e.target.name === "street"
+    ) {
+      setUserProfile({
+        ...userProfile,
+        address: {
+          ...userProfile.address,
+          [e.target.name]: e.target.value,
+        },
+      });
+    } else {
+      setUserProfile({
+        ...userProfile,
+        [e.target.name]: e.target.value,
+      });
+    }
+
     console.log(userProfile);
   }
+
+  /*function onChange(e) {
+    e.persist();
+    //setUserProfile(() => ({ ...userProfile, [e.target.name]: e.target.value }));
+    //setAddress(() => ({ ...address, [e.target.name]: e.target.value }));
+
+    setUserProfile({
+      ...userProfile.address,
+      address: {
+        ...userProfile.address,
+        [e.target.name]: e.target.value,
+      },
+    });
+
+    console.log(userProfile);
+    //console.log(address);
+  }*/
 
   return (
     <>
@@ -139,7 +186,7 @@ export const UpdateProfilePage = () => {
                   <InputGroup>
                     <Input
                       type="textarea"
-                      name="address"
+                      name="street"
                       id="exampleText"
                       onChange={onChange}
                     />
@@ -197,3 +244,19 @@ export const UpdateProfilePage = () => {
     </>
   );
 };
+/*
+
+/*
+{
+"address": {
+    "street": "Home addres o", 
+    "city": "Abuja", 
+    "state": "Alaska - AK"
+    
+},
+"firstName": "Uwaifo",
+"lastName": "Idehenre",
+"phoneNumber": "8083862828",
+"phoneType": "Land Line"
+}
+*/

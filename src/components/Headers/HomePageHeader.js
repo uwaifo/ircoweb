@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import { Button, Container } from "reactstrap";
@@ -39,35 +40,41 @@ function HomePageHeader() {
             <h1>Welcome Home</h1>
             <h3>Welcome to Indian Retirement Resort of Florida .</h3>
             <br />
-            <Button
-              href="/register"
-              className="btn-round mr-1"
-              color="neutral"
-              target="_blank"
-              outline
-            >
-              <i className="btn-round" />
-              register
-            </Button>
-            <Button
-              href="/login"
-              className="btn-round"
-              color="neutral"
-              type="button"
-              outline
-            >
-              Login
-            </Button>
 
-            <Button
-              href="/user/survey"
-              className="btn-round"
-              color="neutral"
-              type="button"
-              outline
-            >
-              Survey
-            </Button>
+            <Link to="/auth">
+              <Button
+                className="btn-round mr-1"
+                color="neutral"
+                target="_blank"
+                outline
+              >
+                <i className="btn-round" />
+                register
+              </Button>
+            </Link>
+            <Link to="/auth">
+              <Button
+                className="btn-round"
+                color="neutral"
+                type="button"
+                outline
+              >
+                Login
+              </Button>
+            </Link>
+
+            <Link color="primary" to="/user/survey">
+              <Button
+                //href="/user/survey"
+                className="btn-round"
+                color="neutral"
+                type="button"
+                outline
+              >
+                {" "}
+                Survey{" "}
+              </Button>
+            </Link>
           </div>
         </Container>
       </div>

@@ -1,17 +1,17 @@
 //import React from "react";
 import { Auth, Hub } from "aws-amplify";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Button, Form, Input, Label } from "reactstrap";
-const url = "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
+//const url = "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
 const initialFormState = {
   username: "",
   email: "",
   password: "",
   confirmPassword: "",
   authCodeLink: "",
-  formType: "signUp",
+  //formType: "signUp",
+  formType: "signIn",
 };
 function AuthForm() {
   const [formState, updateFormState] = useState(initialFormState);
@@ -91,49 +91,54 @@ function AuthForm() {
   return (
     <div>
       {formType === "signUp" && (
-        <Form className="register-form">
-          {/*
+        <>
+          <Link to="/"> Go Back </Link>
+          <h3 className="title mx-auto">Register</h3>
+
+          <Form className="register-form">
+            {/*
           <label>Username</label>
           <Input name="username" onChange={onChange} placeholder="username" />
           */}
 
-          <label>Email</label>
-          <Input name="email" onChange={onChange} placeholder="email" />
-          <label>Password</label>
-          <Input
-            name="password"
-            type="password"
-            onChange={onChange}
-            placeholder="password"
-          />
-          <label>Confirm Password</label>
-          <Input
-            name="confirmPassword"
-            type="password"
-            onChange={onChange}
-            placeholder="confirm password"
-          />
-          <Button block className="btn-round" color="danger" onClick={signUp}>
-            Register
-          </Button>
-          <Label></Label>
-          <div className="forgot">Already Have and Account ?</div>
+            <label>Email</label>
+            <Input name="email" onChange={onChange} placeholder="email" />
+            <label>Password</label>
+            <Input
+              name="password"
+              type="password"
+              onChange={onChange}
+              placeholder="password"
+            />
+            <label>Confirm Password</label>
+            <Input
+              name="confirmPassword"
+              type="password"
+              onChange={onChange}
+              placeholder="confirm password"
+            />
+            <Button block className="btn-round" color="danger" onClick={signUp}>
+              Register
+            </Button>
+            <Label></Label>
+            <div className="forgot">Already Have and Account ?</div>
 
-          <Button
-            block
-            className="btn-round"
-            color="success"
-            onClick={() =>
-              updateFormState(() => ({
-                ...formState,
-                formType: "signIn",
-              }))
-            }
-          >
-            {" "}
-            Sign In
-          </Button>
-        </Form>
+            <Button
+              block
+              className="btn-round"
+              color="success"
+              onClick={() =>
+                updateFormState(() => ({
+                  ...formState,
+                  formType: "signIn",
+                }))
+              }
+            >
+              {" "}
+              Sign In
+            </Button>
+          </Form>
+        </>
       )}
       {formType === "confirmSignUp" && (
         <div>
@@ -156,20 +161,48 @@ function AuthForm() {
         </div>
       )}
       {formType === "signIn" && (
-        <div>
-          <label>Email</label>
-          <Input name="email" onChange={onChange} placeholder="email" />
-          <label>Password</label>
-          <Input
-            name="password"
-            type="password"
-            onChange={onChange}
-            placeholder="password"
-          />
-          <Button block className="btn-round" color="success" onClick={signIn}>
-            Sign In
-          </Button>
-        </div>
+        <>
+          <Link to="/"> Go Back </Link>
+
+          <h3 className="title mx-auto">Login</h3>
+
+          <div>
+            <label>Email</label>
+            <Input name="email" onChange={onChange} placeholder="email" />
+            <label>Password</label>
+            <Input
+              name="password"
+              type="password"
+              onChange={onChange}
+              placeholder="password"
+            />
+            <Button
+              block
+              className="btn-round"
+              color="success"
+              onClick={signIn}
+            >
+              Sign In
+            </Button>
+            <Label></Label>
+            <div className="forgot">Create a new account</div>
+
+            <Button
+              block
+              className="btn-round"
+              color="danger"
+              onClick={() =>
+                updateFormState(() => ({
+                  ...formState,
+                  formType: "signUp",
+                }))
+              }
+            >
+              {" "}
+              Register
+            </Button>
+          </div>
+        </>
       )}
       {formType === "signedIn" && <Redirect to="/user/profile" />}
     </div>

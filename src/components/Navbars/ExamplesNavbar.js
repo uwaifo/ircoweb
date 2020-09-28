@@ -61,8 +61,8 @@ function ExamplesNavbar() {
           >
             <img
               alt="..."
-              width="150"
-              height="75fy push"
+              width="100"
+              height="100"
               //className="img-circle img-no-padding img-responsive"
               src={require("assets/img/logo/logo.png")}
             />
@@ -107,7 +107,7 @@ function ExamplesNavbar() {
             </NavItem>
             <NavItem>
               <NavLink to="/auth" tag={Link}>
-                <i className="" /> Register/Login
+                <i className="" /> Login
               </NavLink>
             </NavItem>
           </Nav>

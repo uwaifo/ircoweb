@@ -2,21 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import { FormGroup, Label, Input, FormText, Button } from "reactstrap";
+import { FormGroup, Label, Input, Button } from "reactstrap";
 //export default function SurveyFeed(params) {
 const SurveyFeed = (param) => {
-  //let qui = "273c4e68-308e-4534-afac-1f4cd5ca4bcb";
-  //let qui = "e6479923-c02e-4a21-85d8-9e204670f44d";
-  //let qui = "4cd41336-c8df-4841-89a1-3ac437030e94";
-  //let qui = "a77bf84c-1b54-4017-b0f5-0f21ad169abc";
-  //localhost:3000/user/survey/eee9b5f7-8abd-4973-8a11-1b09701f423e
   let { id } = useParams();
 
   const url = `https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/question/${id}`;
 
   const [question, setQuestion] = useState([]);
   const [view, setView] = useState("");
-  const [currentQuestion, setCurrentQuestion] = useState([]);
+  //const [currentQuestion, setCurrentQuestion] = useState([]);
 
   useEffect(() => {
     getQuestionFromApi();

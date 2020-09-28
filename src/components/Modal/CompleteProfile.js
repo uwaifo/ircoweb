@@ -1,6 +1,6 @@
 import React from "react";
 // reactstrap components
-import { Button, FormGroup, Input, Modal } from "reactstrap";
+import { Button, Modal } from "reactstrap";
 import { UpdateProfilePage } from "../../views/user/UpdateProfilePage";
 function CompleteProfieModal() {
   const [liveDemo, setLiveDemo] = React.useState(true);
