@@ -83,9 +83,9 @@ function SurveyPage() {
                       Help us serve you better by taking a survey . This way we
                       get to know you better and do more for you.
                     </h4>
-                    <Button href="/user/session/" color="success">
-                      Take Survey
-                    </Button>
+                    <Link to="/user/session/">
+                      <Button color="success">Take Survey</Button>
+                    </Link>
                   </CardBody>
                 </Card>
               </>
