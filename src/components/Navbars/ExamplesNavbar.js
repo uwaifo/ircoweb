@@ -90,11 +90,7 @@ function ExamplesNavbar() {
                 <i className="" /> Home
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink to="/about" tag={Link}>
-                <i className="" /> About
-              </NavLink>
-            </NavItem>
+
             <NavItem>
               <NavLink to="/community" tag={Link}>
                 <i className="" /> Community
@@ -108,6 +104,16 @@ function ExamplesNavbar() {
             <NavItem>
               <NavLink to="/auth" tag={Link}>
                 <i className="" /> Login
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/about" tag={Link}>
+                <i className="" /> About
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/contact" tag={Link}>
+                <i className="" /> Contact
               </NavLink>
             </NavItem>
           </Nav>

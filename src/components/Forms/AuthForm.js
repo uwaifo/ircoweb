@@ -93,7 +93,9 @@ function AuthForm() {
       {formType === "signUp" && (
         <>
           <Link to="/"> Go Back </Link>
-          <h3 className="title mx-auto">Register</h3>
+          <div className="forgot">
+            <h3 className="title mx-auto">Register</h3>
+          </div>
 
           <Form className="register-form">
             {/*
@@ -121,7 +123,9 @@ function AuthForm() {
               Register
             </Button>
             <Label></Label>
-            <div className="forgot">Already Have and Account ?</div>
+            <div className="forgot">
+              <h6>Already have an account ?</h6>
+            </div>
 
             <Button
               block
@@ -164,7 +168,9 @@ function AuthForm() {
         <>
           <Link to="/"> Go Back </Link>
 
-          <h3 className="title mx-auto">Login</h3>
+          <div className="forgot">
+            <h3 className="title mx-auto">Sign In</h3>
+          </div>
 
           <div>
             <label>Email</label>
@@ -185,7 +191,9 @@ function AuthForm() {
               Sign In
             </Button>
             <Label></Label>
-            <div className="forgot">Create a new account</div>
+            <div className="forgot">
+              <h6>Do not have an account?</h6>
+            </div>
 
             <Button
               block

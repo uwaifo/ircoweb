@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { SocialIcon } from "react-social-icons";
 
 import { Auth } from "aws-amplify";
 
@@ -33,8 +34,16 @@ function DemoFooter() {
   return (
     <footer className="footer footer-black footer-white">
       <Container>
+        <div>Follow us on social media</div>
         <Row>
-          <nav className="footer-nav">
+          <SocialIcon url="http://facebook.com/in/jaketrent" />
+          &nbsp;
+          <SocialIcon url="http://twitter.com/in/jaketrent" />
+          &nbsp;
+          <SocialIcon url="http://youtube.com/in/jaketrent" />
+          &nbsp;
+          <SocialIcon url="http://instagram.com/in/jaketrent" />
+          {/*<nav className="footer-nav">
             <ul>
               <li>
                 <Link to="/user/profile">Profile</Link>
@@ -45,11 +54,12 @@ function DemoFooter() {
                 </Link>
               </li>
             </ul>
-          </nav>
+          </nav>*/}
           <div className="credits ml-auto">
-            <span className="copyright">
-              © {new Date().getFullYear()}, made with{" "}
-              <i className="fa fa-heart heart" />
+            <span className="">
+              © {new Date().getFullYear()}, Vero Beach Retirement Resort of
+              Florida | <Link>Privacy Policy</Link> |{" "}
+              <Link to="/contact">Contact</Link>
             </span>
           </div>
         </Row>

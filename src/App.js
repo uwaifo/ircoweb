@@ -23,6 +23,7 @@ import SurveyFeed from "components/Forms/SurveyFeed";
 // pages
 import Index from "views/Index.js";
 import { UpdateProfilePage } from "views/user/UpdateProfilePage";
+import ContactPage from "views/examples/ContactPage";
 // others
 import AuthenticationPage from "./views/examples/AuthenticationPage";
 
@@ -33,6 +34,8 @@ function App() {
         {/* Page Routes */}
         <Route exact path="/" render={(props) => <HomePage {...props} />} />
         <Route path="/about" render={(props) => <AboutPage {...props} />} />
+        <Route path="/contact" component={ContactPage} />
+
         <Route
           path="/community"
           render={(props) => <CommunityPage {...props} />}

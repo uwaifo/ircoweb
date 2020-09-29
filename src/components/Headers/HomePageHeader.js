@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ModalVideo from "react-modal-video";
 
 // reactstrap components
 import { Button, Container } from "reactstrap";
@@ -7,6 +8,8 @@ import { Button, Container } from "reactstrap";
 // core components
 
 function HomePageHeader() {
+  const [isOpen, setOpen] = useState(false);
+
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -23,8 +26,18 @@ function HomePageHeader() {
     }
   });
 
+  function openModal() {
+    setOpen(true);
+  }
+
   return (
     <>
+      <ModalVideo
+        channel="youtube"
+        isOpen={isOpen}
+        videoId="L61p2uyiMSo"
+        onClose={() => setOpen({ isOpen: false })}
+      />
       <div
         style={{
           backgroundImage:
@@ -37,42 +50,20 @@ function HomePageHeader() {
         <div className="filter" />
         <Container>
           <div className="motto text-center">
-            <h1>Welcome Home</h1>
-            <h3>Welcome to Indian Retirement Resort of Florida .</h3>
+            <h1>Welcome</h1>
+            <h3>Welcome to Retirement Resort of Florida .</h3>
             <br />
 
-            <Link to="/auth">
+            <Link>
               <Button
+                onClick={openModal}
                 className="btn-round mr-1"
                 color="neutral"
                 target="_blank"
                 outline
               >
                 <i className="btn-round" />
-                register
-              </Button>
-            </Link>
-            <Link to="/auth">
-              <Button
-                className="btn-round"
-                color="neutral"
-                type="button"
-                outline
-              >
-                Login
-              </Button>
-            </Link>
-
-            <Link color="primary" to="/user/survey">
-              <Button
-                //href="/user/survey"
-                className="btn-round"
-                color="neutral"
-                type="button"
-                outline
-              >
-                {" "}
-                Survey{" "}
+                Watch a video
               </Button>
             </Link>
           </div>
