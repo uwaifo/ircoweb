@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ModalVideo from "react-modal-video";
+import { Modal } from "reactstrap";
 
 // reactstrap components
 import { Button, Container } from "reactstrap";
@@ -9,6 +10,7 @@ import { Button, Container } from "reactstrap";
 
 function HomePageHeader() {
   const [isOpen, setOpen] = useState(false);
+  const [largeModal, setLargeModal] = React.useState(false);
 
   let pageHeader = React.createRef();
 
@@ -26,9 +28,9 @@ function HomePageHeader() {
     }
   });
 
-  function openModal() {
+  /*function openModal() {
     setOpen(true);
-  }
+  }*/
 
   return (
     <>
@@ -56,7 +58,8 @@ function HomePageHeader() {
 
             <Link>
               <Button
-                onClick={openModal}
+                onClick={() => setLargeModal(true)}
+                //onClick={openModal}
                 className="btn-round mr-1"
                 color="neutral"
                 target="_blank"
@@ -67,6 +70,28 @@ function HomePageHeader() {
               </Button>
             </Link>
           </div>
+          <Modal
+            isOpen={largeModal}
+            className="modal-lg"
+            modalClassName="bd-example-modal-lg"
+            toggle={() => setLargeModal(false)}
+          >
+            <div className="modal-header">
+              <h4 className="modal-title" id="myLargeModalLabel">
+                Video comming soon.
+              </h4>
+              <button
+                aria-label="Close"
+                className="close"
+                data-dismiss="modal"
+                type="button"
+                onClick={() => setLargeModal(false)}
+              >
+                <span aria-hidden={true}>×</span>
+              </button>
+            </div>
+            <div className="modal-body">...</div>
+          </Modal>
         </Container>
       </div>
     </>
