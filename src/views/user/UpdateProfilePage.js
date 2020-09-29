@@ -48,16 +48,7 @@ export const UpdateProfilePage = () => {
 
       console.log(updateUrl);
       const updateResponse = await axios.patch(updateUrl, userProfile);
-      /*const updateResponse = await axios({
-        method: "PATCH",
-        url: updateUrl,
-        data: userProfile,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        },
-      });
-      */
+
       //const jsonUpdateResponse = await updateResponse.json();
       console.log(updateResponse);
     } catch (error) {

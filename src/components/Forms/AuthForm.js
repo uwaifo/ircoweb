@@ -2,7 +2,14 @@
 import { Auth, Hub } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Button, Form, Input, Label } from "reactstrap";
+import {
+  Button,
+  Form,
+  Input,
+  Label,
+  PaginationLink,
+  PaginationItem,
+} from "reactstrap";
 //const url = "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
 const initialFormState = {
   username: "",
@@ -92,7 +99,8 @@ function AuthForm() {
     <div>
       {formType === "signUp" && (
         <>
-          <Link to="/"> Go Back </Link>
+          <Link to="/"> Close </Link>
+
           <div className="forgot">
             <h3 className="title mx-auto">Register</h3>
           </div>
@@ -166,7 +174,7 @@ function AuthForm() {
       )}
       {formType === "signIn" && (
         <>
-          <Link to="/"> Go Back </Link>
+          <Link to="/"> Close </Link>
 
           <div className="forgot">
             <h3 className="title mx-auto">Sign In</h3>
