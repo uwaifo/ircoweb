@@ -56,7 +56,7 @@ function HomePageHeader() {
             <h3>Welcome to Retirement Resort of Florida .</h3>
             <br />
 
-            <Link>
+            <Link to="#">
               <Button
                 onClick={() => setLargeModal(true)}
                 //onClick={openModal}

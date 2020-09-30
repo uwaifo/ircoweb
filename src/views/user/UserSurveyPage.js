@@ -1,11 +1,11 @@
 import DemoFooter from "components/Footers/DemoFooter.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import React, { useEffect, useState } from "react";
+import React /*, { useEffect, useState }*/ from "react";
 import { Button, Card, CardBody, CardHeader, Container } from "reactstrap";
 
 function UserSurveyPage() {
-  const url =
+  /*const url =
     "https://iddqyvacj6.execute-api.us-west-1.amazonaws.com/dev/questions";
 
   const [question, setQuestion] = useState([]);
@@ -20,7 +20,7 @@ function UserSurveyPage() {
     //console.log("data : ", jsonResponse);
 
     setQuestion(jsonResponse);
-  };
+  };*/
   return (
     <>
       <ExamplesNavbar />

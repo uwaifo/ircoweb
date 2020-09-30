@@ -1,41 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Modal } from "reactstrap";
+import { PrivacyPolicyText } from "components/PrivacyPolicy";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
-import { PrivacyPolicyText } from "components/PrivacyPolicy";
-
-import { Auth } from "aws-amplify";
-
-// reactstrap components
-import { Row, Container } from "reactstrap";
+import { Container, Modal, Row } from "reactstrap";
 
 function DemoFooter() {
-  useEffect(() => {
-    checkUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const [user, setUser] = useState({});
   const [showPolicy, setShowPolicy] = useState(false);
-  async function checkUser() {
-    try {
-      const data = await Auth.currentUserPoolUser();
-      const userInfo = { username: data.username, ...data.attributes };
-      setUser(userInfo);
-      console.log("user: ", user);
 
-      //console.log("data: ", userInfo);
-      //user = userInfo;
-    } catch (err) {
-      console.log("error: ", err);
-    }
-  }
-
-  const logout = () => {
-    setUser({});
-    Auth.signOut();
-  };
-
-  const handlePolicy = () => {};
+  //const handlePolicy = () => {};
   return (
     <footer className="footer footer-black footer-white">
       <Container>
@@ -88,8 +60,10 @@ function DemoFooter() {
             <span className="">
               © {new Date().getFullYear()}, Vero Beach Retirement Resort of
               Florida |{" "}
-              <Link onClick={() => setShowPolicy(true)}>Privacy Policy</Link> |{" "}
-              <Link to="/contact">Contact</Link>
+              <Link to="#" onClick={() => setShowPolicy(true)}>
+                Privacy Policy
+              </Link>{" "}
+              | <Link to="/contact">Contact</Link>
             </span>
           </div>
         </Row>

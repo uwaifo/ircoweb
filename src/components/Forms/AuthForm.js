@@ -2,14 +2,7 @@
 import { Auth, Hub } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import {
-  Button,
-  Form,
-  Input,
-  Label,
-  PaginationLink,
-  PaginationItem,
-} from "reactstrap";
+import { Button, Form, Input, Label } from "reactstrap";
 //const url = "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
 const initialFormState = {
   username: "",
@@ -68,6 +61,9 @@ function AuthForm() {
     //const { email, password } = formState;
     let { username, email, password, confirmPassword } = formState;
     username = email;
+    if (password !== confirmPassword) {
+      return alert("Miss-matching passwords");
+    }
 
     await Auth.signUp({
       username,
@@ -93,7 +89,7 @@ function AuthForm() {
 
     updateFormState(() => ({ ...formState, formType: "signedIn" }));
   }
-  async function signedIn() {}
+  //async function signedIn() {}
 
   return (
     <div>

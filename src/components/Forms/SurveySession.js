@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Auth } from "aws-amplify";
 import {
   Button,
   FormGroup,
@@ -28,37 +27,71 @@ function SurveySession() {
     userId: "",
     response: [],
   };
+
+  const paginationState = {
+    previous: -1,
+    current: 0,
+    next: 1,
+  };
+
+  //ALL QUESTIONS
   const [questions, setQuestions] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState([]);
-  const [view, setView] = useState("");
+  questions.sort(
+    (a, b) => parseInt(a.sequenceNumber) - parseInt(b.sequenceNumber)
+  );
+
+  //RESPONSE OPTION
   const [responseOption, setResponseOption] = useState({});
+
+  const [pagination, setPagination] = useState(paginationState);
+
+  //CURRENT QUESTION AND TYPE OF OPTIONS VIEW
+  const [currentQuestion, setCurrentQuestion] = useState();
+  const [view, setView] = useState({});
+
+  //console.log(pagination);
 
   useEffect(() => {
     getQuestionsFromApi();
-    //getSingleQuestionFromApi(argId);
+  }, []);
+
+  useEffect(() => {
+    setQuestion();
+  });
+
+  useEffect(() => {
+    setQuestionView();
   });
 
   const getQuestionsFromApi = async () => {
     const response = await fetch(questionsUrl);
     const jsonResponse = await response.json();
     setQuestions(jsonResponse);
+    //setCurrentQuestion(questions[pagination.current]);
+  };
+  //console.log(pagination);
+
+  const setQuestion = async () => {
+    await setCurrentQuestion(questions[pagination.current]);
   };
 
-  const getSingleQuestionFromApi = async (argId) => {
-    let argUrl = singleQuestionUrl + "/" + argId;
+  const setQuestionView = async () => {
     try {
-      const response = await fetch(argUrl);
-      const jsonResponse = await response.json();
-      //console.log("current should be :", jsonResponse);
-      setCurrentQuestion(jsonResponse);
+      const viewUrl = await `${singleQuestionUrl}/${currentQuestion.questionId}`;
+      const properview = await fetch(viewUrl);
+      const jsonResponse = await properview.json();
+
       setView(jsonResponse.questionType);
+
+      console.log("view : ", view);
+
+      console.log(viewUrl);
     } catch (error) {
       console.log(error);
     }
   };
-  questions.sort(
-    (a, b) => parseInt(a.sequenceNumber) - parseInt(b.sequenceNumber)
-  );
+  //setCurrentQuestion(questions[pagination.current]);
+  // setView(questions[pagination.current]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -70,7 +103,7 @@ function SurveySession() {
       console.log(error);
     }
   }
-
+  //RENDER OPTION
   const renderOption = (function() {
     //
     async function handleSingleSelect(e) {
@@ -96,10 +129,6 @@ function SurveySession() {
               autoComplete="off"
             />
           </FormGroup>
-
-          <Button color="primary" type="submit">
-            Submit
-          </Button>
         </form>
       );
     } else if (view === "SINGLE-CHOICE") {
@@ -124,10 +153,6 @@ function SurveySession() {
               </FormGroup>
             </>
           ))}
-
-          <Button onClick={handleSubmit} color="primary" type="submit">
-            Submit
-          </Button>
         </form>
       );
     } else if (view === "MULTIPLE-CHOICE") {
@@ -151,10 +176,6 @@ function SurveySession() {
               </FormGroup>
             </>
           ))}
-
-          <Button onClick={handleSubmit} color="primary" type="submit">
-            Submit
-          </Button>
         </form>
       );
     } else if (view === "DROPDOWN") {
@@ -170,11 +191,131 @@ function SurveySession() {
               </Input>
             </FormGroup>
           </>
-
-          <Button color="primary" type="submit">
-            Submit
-          </Button>
         </form>
+      );
+    }
+  })();
+
+  //RENDER QUESTION
+  const renderQuestion = (function() {
+    if (currentQuestion) {
+      return (
+        <>
+          <div>
+            <h2>{currentQuestion.questionText}</h2>
+            <br />
+          </div>
+        </>
+      );
+    }
+  })();
+
+  //RENDER PAGINATION
+  const renderPagination = (function() {
+    if (pagination.current === 0) {
+      return (
+        <>
+          <Pagination>
+            <PaginationItem className="disabled">
+              <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
+                Previous
+              </PaginationLink>
+            </PaginationItem>
+
+            <PaginationItem>
+              <PaginationLink
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPagination({
+                    previous: pagination.previous + 1,
+                    current: pagination.current + 1,
+                    next: pagination.next + 1,
+                  });
+                  console.log(pagination);
+                }}
+              >
+                Next
+              </PaginationLink>
+            </PaginationItem>
+          </Pagination>
+        </>
+      );
+    } else if (pagination.current >= 1) {
+      return (
+        <>
+          <Pagination>
+            <PaginationItem>
+              <PaginationLink
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPagination({
+                    previous: pagination.previous - 1,
+                    current: pagination.current - 1,
+                    next: pagination.next - 1,
+                  });
+                }}
+              >
+                Previous
+              </PaginationLink>
+            </PaginationItem>
+
+            <PaginationItem>
+              <PaginationLink
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPagination({
+                    previous: pagination.previous + 1,
+                    current: pagination.current + 1,
+                    next: pagination.next + 1,
+                  });
+                }}
+              >
+                Next
+              </PaginationLink>
+            </PaginationItem>
+          </Pagination>
+        </>
+      );
+    } else if (pagination.cuurent === questions.length) {
+      return (
+        <>
+          <Pagination>
+            <PaginationItem>
+              <PaginationLink
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPagination({
+                    previous: pagination.previous - 1,
+                    current: pagination.current - 1,
+                    next: pagination.next - 1,
+                  });
+                }}
+              >
+                Previous
+              </PaginationLink>
+            </PaginationItem>
+
+            <PaginationItem>
+              <PaginationLink
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPagination({
+                    previous: pagination.previous + 1,
+                    current: pagination.current + 1,
+                    next: pagination.next + 1,
+                  });
+                }}
+              >
+                Submit
+              </PaginationLink>
+            </PaginationItem>
+          </Pagination>
+        </>
       );
     }
   })();
@@ -185,25 +326,26 @@ function SurveySession() {
       <ProfilePageHeader />
       <Container>
         <blockquote className="blockquote">
-          <p className="mb-0">
-            <h5 className="title">
-              Here you are presented with 25 questions to comlplete at your
-              convenient time.
-              <br />
-              You may choose to leave the survey and return at another time.Your
-              response will be saved and you can complete it later.
-            </h5>
-          </p>
+          <h5 className="title">
+            You may choose to leave the survey and return at another time.Your
+            response will be saved and you can complete it later.
+          </h5>
         </blockquote>
-        <div>
-          <h2>{currentQuestion.questionText}</h2>
-          <br />
-        </div>
+        {renderQuestion}
+
         {renderOption}
         <br />
-        <nav aria-label="...">
-          <Pagination>
-            {questions.map((count) => (
+        <nav aria-label="...">{renderPagination}</nav>
+      </Container>
+      <DemoFooter />
+    </>
+  );
+}
+
+export default SurveySession;
+
+/*
+{questions.map((count) => (
               <>
                 <PaginationItem>
                   <PaginationLink
@@ -222,12 +364,4 @@ function SurveySession() {
                 </PaginationItem>
               </>
             ))}
-          </Pagination>
-        </nav>
-      </Container>
-      <DemoFooter />
-    </>
-  );
-}
-
-export default SurveySession;
+*/

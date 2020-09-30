@@ -18,12 +18,12 @@ import { Link } from "react-router-dom";
 function SurveyPage() {
   const userApi =
     "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
-  const url =
-    "https://iddqyvacj6.execute-api.us-west-1.amazonaws.com/dev/questions";
+  //const url =
+  //("https://iddqyvacj6.execute-api.us-west-1.amazonaws.com/dev/questions");
 
   const [user, setUser] = useState({});
   const [userProfile, setUserProfile] = useState({});
-  const [pendingQuestions, setQuestion] = useState([]);
+  //const [pendingQuestions, setQuestion] = useState([]);
 
   useEffect(() => {
     checkUser();
@@ -31,7 +31,7 @@ function SurveyPage() {
   }, []);
 
   useEffect(() => {
-    getQuestionFromApi();
+    //getQuestionFromApi();
   });
 
   async function checkUser() {
@@ -52,13 +52,13 @@ function SurveyPage() {
     }
   }
 
-  const getQuestionFromApi = async () => {
+  /*const getQuestionFromApi = async () => {
     const response = await fetch(url);
     const jsonResponse = await response.json();
     //console.log("data : ", jsonResponse);
 
-    setQuestion(jsonResponse);
-  };
+    //setQuestion(jsonResponse);
+  };*/
 
   return (
     <>

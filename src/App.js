@@ -32,7 +32,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         {/* Page Routes */}
-        <Route exact path="/" render={(props) => <HomePage {...props} />} />
+        <Route exact path="/" component={HomePage} />
         <Route path="/about" render={(props) => <AboutPage {...props} />} />
         <Route path="/contact" component={ContactPage} />
 
