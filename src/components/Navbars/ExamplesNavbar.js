@@ -102,6 +102,11 @@ function ExamplesNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
+              <NavLink to="#" tag={Link}>
+                <i className="" /> Time Line
+              </NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink to="/auth" tag={Link}>
                 <i className="" /> Login
               </NavLink>

@@ -1,64 +1,93 @@
+import DemoFooter from "components/Footers/DemoFooter.js";
+import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
+import CurrentQuestionModal from "components/Modal/CurrentQuestion";
+import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import { GetAllQuestions } from "helpers/getAllQuestions";
+import { GetCurrentUser, GetCurrentUserprofile } from "helpers/getCurrentUser";
 import React, { useEffect, useState } from "react";
+import { createGlobalState } from "react-hooks-global-state";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
   CardBody,
-  CardTitle,
-  CardText,
   CardHeader,
+  CardText,
+  CardTitle,
   Container,
+  Modal,
 } from "reactstrap";
-import { Auth } from "aws-amplify";
 
-import DemoFooter from "components/Footers/DemoFooter.js";
-import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import { Link } from "react-router-dom";
-
+//GLOBAL STATE
+const initialState = { count: 0 };
 function SurveyPage() {
-  const userApi =
-    "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
-  //const url =
-  //("https://iddqyvacj6.execute-api.us-west-1.amazonaws.com/dev/questions");
-
-  const [user, setUser] = useState({});
+  const currentQuestionState = {
+    previous: -1,
+    current: 0,
+    next: 1,
+  };
+  //const [user, setUser] = useState({});
   const [userProfile, setUserProfile] = useState({});
-  //const [pendingQuestions, setQuestion] = useState([]);
+  const [Questions, setQuestions] = useState([]);
+  const [questNumber, setQuestNumber] = useState(0);
 
+  const [currentQuestion, setCurrentQuestion] = useState(
+    Questions[questNumber]
+  );
+
+  const [openQuestionModal, setOpenModal] = useState(false);
+  const [showPolicy, setShowPolicy] = useState(false);
+  Questions.sort(
+    (a, b) => parseInt(a.sequenceNumber) - parseInt(b.sequenceNumber)
+  );
   useEffect(() => {
     checkUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    //getQuestionFromApi();
+    getQuestionFromApi();
+  }, []);
+
+  useEffect(() => {
+    presentQuestion();
   });
 
+  function presentQuestion() {
+    setCurrentQuestion(Questions[questNumber]);
+  }
+
+  function handleNext(newValue) {
+    setQuestNumber(newValue);
+    //setCurrentQuestion(Questions[questNumber]);
+    console.log("SP :", newValue);
+  }
+
   async function checkUser() {
+    //await setUserProfile(GetCurrentUserprofile);
     try {
-      const data = await Auth.currentUserPoolUser();
-      const userInfo = { username: data.username, ...data.attributes };
-      setUser(userInfo);
-      // console.log("user: ", user);
+      const data = await GetCurrentUser();
 
-      const response = await fetch(`${userApi}/${data.username}`);
-      const jsonResponse = await response.json();
-      setUserProfile(jsonResponse);
-
-      //console.log("data: ", userInfo);
-      //user = userInfo;
+      const userInfo = await GetCurrentUserprofile(data);
+      setUserProfile(userInfo);
     } catch (err) {
       console.log("error: ", err);
     }
   }
 
-  /*const getQuestionFromApi = async () => {
-    const response = await fetch(url);
-    const jsonResponse = await response.json();
-    //console.log("data : ", jsonResponse);
+  async function getQuestionFromApi() {
+    try {
+      const data = await GetAllQuestions();
+      setQuestions(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-    //setQuestion(jsonResponse);
-  };*/
+  //console.log(userProfile);
+  //console.log(Questions);
+  //console.log(openQuestionModal);
+  //console.log(currentQuestion);
 
   return (
     <>
@@ -66,7 +95,7 @@ function SurveyPage() {
       <ProfilePageHeader />
       <Container>
         {(function() {
-          if (user.username) {
+          if (userProfile.userId) {
             return (
               <>
                 <Card>
@@ -86,8 +115,40 @@ function SurveyPage() {
                     <Link to="/user/session/">
                       <Button color="success">Take Survey</Button>
                     </Link>
+                    &nbsp;
+                    <Button color="danger" onClick={() => setShowPolicy(true)}>
+                      Test Survey
+                    </Button>{" "}
+                    <h4>{Questions.length}</h4>
                   </CardBody>
                 </Card>
+                <Modal
+                  isOpen={showPolicy}
+                  className="modal-lg"
+                  modalClassName="bd-example-modal-lg"
+                  toggle={() => setShowPolicy(false)}
+                >
+                  {" "}
+                  <div className="modal-header">
+                    <CurrentQuestionModal
+                      count={Questions.length}
+                      question={currentQuestion}
+                      user={userProfile}
+                      nextOne={handleNext}
+                      currentQuestion={currentQuestion}
+                    />
+                    <button
+                      aria-label="Close"
+                      className="close"
+                      data-dismiss="modal"
+                      type="button"
+                      onClick={() => setShowPolicy(false)}
+                    >
+                      <span aria-hidden={true}>×</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">...</div>
+                </Modal>
               </>
             );
           } else {

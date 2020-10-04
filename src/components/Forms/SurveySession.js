@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
-  Button,
+  //Button,
   FormGroup,
   Label,
   Input,
@@ -22,6 +22,7 @@ const singleQuestionUrl =
 const submitUrl =
   "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user/survey";
 function SurveySession() {
+  let userSurveyObj = [];
   const initialResponse = {
     questionId: "",
     userId: "",
@@ -46,8 +47,9 @@ function SurveySession() {
   const [pagination, setPagination] = useState(paginationState);
 
   //CURRENT QUESTION AND TYPE OF OPTIONS VIEW
-  const [currentQuestion, setCurrentQuestion] = useState();
-  const [view, setView] = useState({});
+  const [currentQuestion, setCurrentQuestion] = useState([]);
+  const [currentUser, setSessionUser] = useState({});
+  const [view, setView] = useState([]);
 
   //console.log(pagination);
 
@@ -68,6 +70,10 @@ function SurveySession() {
     const jsonResponse = await response.json();
     setQuestions(jsonResponse);
     //setCurrentQuestion(questions[pagination.current]);
+
+    //Get User
+    const resUser = await GetCurrentUser();
+    setSessionUser(resUser);
   };
   //console.log(pagination);
 
@@ -77,15 +83,15 @@ function SurveySession() {
 
   const setQuestionView = async () => {
     try {
-      const viewUrl = await `${singleQuestionUrl}/${currentQuestion.questionId}`;
+      const viewUrl = `${singleQuestionUrl}/${currentQuestion.questionId}`;
       const properview = await fetch(viewUrl);
       const jsonResponse = await properview.json();
 
       setView(jsonResponse.questionType);
 
-      console.log("view : ", view);
+      //console.log("view : ", view);
 
-      console.log(viewUrl);
+      //console.log(viewUrl);
     } catch (error) {
       console.log(error);
     }
@@ -93,43 +99,79 @@ function SurveySession() {
   //setCurrentQuestion(questions[pagination.current]);
   // setView(questions[pagination.current]);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    e.persist();
+  async function handleSubmit() {
+    //append to tempral object
+    // userSurveyObj.push(userSurveyObj, responseOption);
+    //console.log(userSurveyObj);
+    /*
     try {
       const userResponseObj = await axios.post(submitUrl, responseOption);
-      console.log(userResponseObj);
+      console.log("SENDING : ", responseOption);
+      console.log("RECEIVING : ", userResponseObj);
     } catch (error) {
       console.log(error);
     }
+    setResponseOption(initialResponse);
+    console.log("RESET TO ", responseOption);
+    */
+  }
+  async function handleSingleSelect(e) {
+    e.persist();
+    //const resUser = await GetCurrentUser();
+    setResponseOption({
+      questionId: currentQuestion.questionId,
+      userId: currentUser.username,
+      response: [e.target.value],
+    });
+    //console.log(responseOption);
+    //console.log(e.target.id);
+  }
+
+  async function handleMultipleSelect(e) {
+    e.persist();
+    const resUser = await GetCurrentUser();
+    setResponseOption({
+      questionId: currentQuestion.questionId,
+      userId: resUser.username,
+      response: [e.target.value],
+    });
+    console.log(responseOption);
+    console.log(e.target.id);
+  }
+
+  function handleTextInput(e) {
+    e.persist();
+
+    setResponseOption({
+      questionId: currentQuestion.questionId,
+      userId: setSessionUser.username,
+      response: [e.target.value],
+    });
+
+    console.log(responseOption);
+    console.log(e.target.id);
   }
   //RENDER OPTION
-  const renderOption = (function() {
+  const renderOption = (function(e) {
     //
-    async function handleSingleSelect(e) {
-      e.persist();
-      const resUser = await GetCurrentUser();
-      setResponseOption({
-        questionId: currentQuestion.questionId,
-        userId: resUser.username,
-        response: [e.target.value],
-      });
-      console.log(responseOption);
-    }
+
     if (view === "INPUT") {
       //return <button>textinput</button>;
       return (
-        <form>
-          <FormGroup>
-            <Input
-              type="text"
-              name="password"
-              id="examplePassword"
-              //placeholder="PaSssword"
-              autoComplete="off"
-            />
-          </FormGroup>
-        </form>
+        <>
+          <form>
+            <FormGroup>
+              <Input
+                type="text"
+                name="password"
+                id={currentQuestion.text}
+                onChange={handleTextInput}
+                //placeholder="PaSssword"
+                autoComplete="off"
+              />
+            </FormGroup>
+          </form>
+        </>
       );
     } else if (view === "SINGLE-CHOICE") {
       return (
@@ -140,11 +182,13 @@ function SurveySession() {
                 <div className="form-check-radio">
                   <Label className="form-check-label">
                     <Input
+                      key={answerOption.id}
                       type="radio"
                       onChange={handleSingleSelect}
                       name="selectedoption"
-                      id="exampleRadios1"
+                      //id="exampleRadios1"
                       value={answerOption.id}
+                      id={answerOption.text}
                     />
                     {answerOption.text}
                     <span className="form-check-sign"></span>
@@ -164,10 +208,12 @@ function SurveySession() {
                 <div className="form-check">
                   <Label className="form-check-label">
                     <Input
+                      key={answerOption.id}
+                      onChange={handleMultipleSelect}
                       type="checkbox"
                       name="exampleRadios"
-                      id="exampleRadios1"
-                      value="option1"
+                      value={answerOption.id}
+                      id={answerOption.text}
                     />
                     {answerOption.text}
                     <span className="form-check-sign"></span>
@@ -184,15 +230,31 @@ function SurveySession() {
           <>
             <FormGroup>
               <Label for="exampleSelect1">Example select</Label>
-              <Input type="select" name="select" id="exampleSelect1">
+              <Input
+                type="select"
+                name="select"
+                onChange={handleSingleSelect}
+
+                //id={answerOption.text}
+                //value={answerOption.id}
+                //onChange={handleSingleSelect}
+              >
                 {currentQuestion.responseOption.map((answerOption) => (
-                  <option key={answerOption.id}>{answerOption.text}</option>
+                  <option
+                    key={answerOption.id}
+                    id={answerOption.text}
+                    value={answerOption.id}
+                    //onChange={handleSingleSelect}
+                  >
+                    {answerOption.text}
+                  </option>
                 ))}
               </Input>
             </FormGroup>
           </>
         </form>
       );
+    } else {
     }
   })();
 
@@ -212,6 +274,7 @@ function SurveySession() {
 
   //RENDER PAGINATION
   const renderPagination = (function() {
+    //INITIAL RENDITION
     if (pagination.current === 0) {
       return (
         <>
@@ -232,7 +295,7 @@ function SurveySession() {
                     current: pagination.current + 1,
                     next: pagination.next + 1,
                   });
-                  console.log(pagination);
+                  handleSubmit();
                 }}
               >
                 Next
@@ -271,6 +334,7 @@ function SurveySession() {
                     current: pagination.current + 1,
                     next: pagination.next + 1,
                   });
+                  handleSubmit(e);
                 }}
               >
                 Next
@@ -364,4 +428,34 @@ export default SurveySession;
                 </PaginationItem>
               </>
             ))}
+*/
+
+/*
+<form>
+          <>
+            <FormGroup>
+              <Label for="exampleSelect1">Example select</Label>
+              <Input
+                type="select"
+                name="select"
+                onChange={handleSingleSelect}
+
+                //id={answerOption.text}
+                //value={answerOption.id}
+                //onChange={handleSingleSelect}
+              >
+                {currentQuestion.responseOption.map((answerOption) => (
+                  <option
+                    id={answerOption.text}
+                    value={answerOption.id}
+                    //onChange={handleSingleSelect}
+                    key={answerOption.id}
+                  >
+                    {answerOption.text}
+                  </option>
+                ))}
+              </Input>
+            </FormGroup>
+          </>
+        </form>
 */

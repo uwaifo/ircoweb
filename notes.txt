@@ -1,3 +1,5 @@
+PASSING PRPS 
+https://webomnizz.com/change-parent-component-state-from-child-using-hooks-in-react/
 GRAPHQL QUERIES
 
 STATES
