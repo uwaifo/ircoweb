@@ -24,14 +24,20 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 import { SendSelectedResponse } from "helpers/sendUserResponse";
+import { UpdateSurveyStatus } from "helpers/userSurveyStatus";
 
 function TakeSurvey() {
   //INITIAL STATES
   let tempResponse = [];
+  let selected = [];
   let newResponse = {
     questionId: "",
     userId: "",
     response: [],
+  };
+  let statusObject = {
+    userId: "",
+    surveyStatus: "",
   };
   //STATES
   const [userProfile, setUserProfile] = useState({});
@@ -98,12 +104,34 @@ function TakeSurvey() {
 
   //TRIGGERS
   async function handleNext() {
+    //tempResponse.push(newResponse);
+    if (currentQuestion.questionType === "MULTIPLE-CHOICE") {
+      handleCheckBox();
+    }
     tempResponse.push(newResponse);
+
     //setUserResponse(tempResponse);
-    //await SendSelectedResponse(newResponse);
+    await SendSelectedResponse(newResponse);
+    console.log("new : ", newResponse);
 
     console.log("TEMP : ", tempResponse);
     setQuestNumber(questNumber + 1);
+    if (currentQuestion.sequenceNumber == Questions.length) {
+      statusObject = {
+        userId: userProfile.userId,
+        surveyStatus: "COMPLETE",
+      };
+      await UpdateSurveyStatus(statusObject);
+      console.log("Competed Survey");
+    }
+    if (currentQuestion.sequenceNumber === 1) {
+      statusObject = {
+        userId: userProfile.userId,
+        surveyStatus: "IN-PROGRESS",
+      };
+      await UpdateSurveyStatus(statusObject);
+      console.log("Survey in progress");
+    }
     //props.nextOne(question.sequenceNumber + 1);
   }
   function handleInputText(e) {
@@ -127,20 +155,18 @@ function TakeSurvey() {
     };
   }
 
-  async function handleMultipleSelect(e) {
-    e.persist();
+  function handleMultipleSelect(e) {
+    // e.persist();
     setCheckedItems({ ...checkedItems, [e.target.id]: e.target.checked });
-    //console.log(checkedItems);
-    let selected = [];
+  }
+
+  function handleCheckBox() {
     for (const key in checkedItems) {
       if (checkedItems[key] === true) {
         selected.push(key);
+        //selected.push(checkedItems[key]);
       }
-      //console.log(key);
     }
-
-    console.log("keys : ", selected);
-
     newResponse = {
       questionId: currentQuestion.questionId,
       userId: userProfile.userId,
@@ -345,7 +371,21 @@ function TakeSurvey() {
                     <h3>Modal here</h3>
                     <Container className="align-content-start text-left">
                       {(function() {
-                        if (currentQuestion) {
+                        if (userProfile.surveyStatus === "COMPLETE") {
+                          return (
+                            <>
+                              <h5
+                                className="modal-title"
+                                id="myLargeModalLabel"
+                              >
+                                You have already participated in the survey.
+                              </h5>
+                            </>
+                          );
+                        } else if (
+                          currentQuestion &&
+                          userProfile != "COMPLETE"
+                        ) {
                           return (
                             <>
                               <h5
