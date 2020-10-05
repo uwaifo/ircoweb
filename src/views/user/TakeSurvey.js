@@ -49,6 +49,7 @@ function TakeSurvey() {
   );
   const [userResponse, setUserResponse] = useState(tempResponse);
   const [checkedItems, setCheckedItems] = useState({});
+  const [surveyProgress, setSurveyProgress] = useState(0);
 
   //SORT THE QUSTIONS BY SEQUENCE NUMBER
   Questions.sort(
@@ -73,6 +74,10 @@ function TakeSurvey() {
   useEffect(() => {
     console.log("checkedItems: ", checkedItems);
   }, [checkedItems]);
+
+  useEffect(() => {
+    console.log("survey position : ", surveyProgress);
+  }, [surveyProgress]);
 
   //USE EFFECT FUNCTIONS
   async function checkUser() {
@@ -111,17 +116,20 @@ function TakeSurvey() {
     tempResponse.push(newResponse);
 
     //setUserResponse(tempResponse);
-    await SendSelectedResponse(newResponse);
+    //await SendSelectedResponse(newResponse);
     console.log("new : ", newResponse);
 
     console.log("TEMP : ", tempResponse);
     setQuestNumber(questNumber + 1);
-    if (currentQuestion.sequenceNumber == Questions.length) {
+    //setSurveyProgress(questNumber);
+    //Now we update your progress in the db
+
+    if (currentQuestion.sequenceNumber === Questions.length) {
       statusObject = {
         userId: userProfile.userId,
         surveyStatus: "COMPLETE",
       };
-      await UpdateSurveyStatus(statusObject);
+      //await UpdateSurveyStatus(statusObject);
       console.log("Competed Survey");
     }
     if (currentQuestion.sequenceNumber === 1) {
@@ -129,7 +137,7 @@ function TakeSurvey() {
         userId: userProfile.userId,
         surveyStatus: "IN-PROGRESS",
       };
-      await UpdateSurveyStatus(statusObject);
+      //await UpdateSurveyStatus(statusObject);
       console.log("Survey in progress");
     }
     //props.nextOne(question.sequenceNumber + 1);
@@ -306,7 +314,7 @@ function TakeSurvey() {
                     Previous
                   </PaginationLink>
                 </PaginationItem>
-
+                &nbsp; &nbsp;
                 <PaginationItem>
                   <PaginationLink
                     href="#"
@@ -368,7 +376,20 @@ function TakeSurvey() {
                 >
                   {" "}
                   <div className="modal-header">
-                    <h3>Modal here</h3>
+                    <button
+                      aria-label="Close"
+                      className="close"
+                      data-dismiss="modal"
+                      type="button"
+                      onClick={() => setShowQuestion(false)}
+
+                      //onClick={() => setLiveDemo(false)}
+                    >
+                      <span aria-hidden={true}>×</span>
+                    </button>
+                    <h3>Retirement Survey</h3>
+
+                    <hr />
                     <Container className="align-content-start text-left">
                       {(function() {
                         if (userProfile.surveyStatus === "COMPLETE") {
@@ -388,6 +409,16 @@ function TakeSurvey() {
                         ) {
                           return (
                             <>
+                              <RenderQuestionStatement />
+                              <RenderQuestionOptions />
+
+                              <h5>
+                                {" "}
+                                Question {
+                                  currentQuestion.sequenceNumber
+                                } of {Questions.length}
+                              </h5>
+                              <hr />
                               <h5
                                 className="modal-title"
                                 id="myLargeModalLabel"
@@ -395,15 +426,6 @@ function TakeSurvey() {
                                 You may choose to leave the survey and return at
                                 another time.Your response will be saved and you
                                 can complete it later.
-                              </h5>
-                              <RenderQuestionStatement />
-                              <RenderQuestionOptions />
-
-                              <h5>
-                                {" "}
-                                {userProfile.firstName} Attempting question{" "}
-                                {currentQuestion.sequenceNumber} of{" "}
-                                {Questions.length}
                               </h5>
                             </>
                           );
@@ -426,18 +448,7 @@ function TakeSurvey() {
                         }
                       })()}
                     </Container>
-
-                    <button
-                      aria-label="Close"
-                      className="close"
-                      data-dismiss="modal"
-                      type="button"
-                      onClick={() => setShowQuestion(false)}
-                    >
-                      <span aria-hidden={true}>×</span>
-                    </button>
                   </div>
-                  <div className="modal-body">...</div>
                 </Modal>
               </>
             );
