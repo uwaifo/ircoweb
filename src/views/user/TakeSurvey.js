@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
+  Badge,
   Button,
   Card,
   CardBody,
@@ -25,6 +26,7 @@ import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 import { SendSelectedResponse } from "helpers/sendUserResponse";
 import { UpdateSurveyStatus } from "helpers/userSurveyStatus";
+import { PreSubmitCheck } from "helpers/preSubmitCheck";
 
 function TakeSurvey() {
   //INITIAL STATES
@@ -50,6 +52,7 @@ function TakeSurvey() {
   const [userResponse, setUserResponse] = useState(tempResponse);
   const [checkedItems, setCheckedItems] = useState({});
   const [surveyProgress, setSurveyProgress] = useState(0);
+  const [existingQuestion, checkExistingQuestion] = useState(false);
 
   //SORT THE QUSTIONS BY SEQUENCE NUMBER
   Questions.sort(
@@ -71,12 +74,17 @@ function TakeSurvey() {
   useEffect(() => {
     stackResponse();
   });
+
   useEffect(() => {
-    console.log("checkedItems: ", checkedItems);
+    checkIfAttempted();
+  });
+
+  useEffect(() => {
+    // console.log("checkedItems: ", checkedItems);
   }, [checkedItems]);
 
   useEffect(() => {
-    console.log("survey position : ", surveyProgress);
+    //console.log("survey position : ", surveyProgress);
   }, [surveyProgress]);
 
   //USE EFFECT FUNCTIONS
@@ -103,6 +111,20 @@ function TakeSurvey() {
     setCurrentQuestion(Questions[questNumber]);
   }
 
+  async function checkIfAttempted() {
+    //PREFLIGHT CHECK
+
+    try {
+      const checkResponse = await PreSubmitCheck(
+        userProfile.userId,
+        currentQuestion.questionId
+      );
+      checkExistingQuestion(checkResponse);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function stackResponse() {
     //setUserResponse(tempResponse);
   }
@@ -115,33 +137,48 @@ function TakeSurvey() {
     }
     tempResponse.push(newResponse);
 
-    //setUserResponse(tempResponse);
-    await SendSelectedResponse(newResponse);
-    console.log("new : ", newResponse);
+    /*const eligibleInput = await PreSubmitCheck(
+      newResponse.userId,
+      newResponse.questionId
+    );
+        console.log("IS VALID : ", eligibleInput);
 
-    console.log("TEMP : ", tempResponse);
+    */
+
+    console.log("IS VALID : ", existingQuestion);
+    if (existingQuestion) {
+      await SendSelectedResponse(newResponse);
+      console.log("new : ", newResponse);
+
+      //setQuestNumber(questNumber + 1);
+      //Now we update your progress in the db
+
+      if (currentQuestion.sequenceNumber === Questions.length) {
+        statusObject = {
+          userId: userProfile.userId,
+          surveyStatus: "COMPLETE",
+        };
+        await UpdateSurveyStatus(statusObject);
+        //console.log("Competed Survey");
+      }
+      if (currentQuestion.sequenceNumber === 1) {
+        statusObject = {
+          userId: userProfile.userId,
+          surveyStatus: "IN-PROGRESS",
+        };
+        await UpdateSurveyStatus(statusObject);
+        // console.log("Survey in progress");
+      }
+    }
+
     setQuestNumber(questNumber + 1);
-    //setSurveyProgress(questNumber);
-    //Now we update your progress in the db
+    setSurveyProgress(questNumber);
 
-    if (currentQuestion.sequenceNumber === Questions.length) {
-      statusObject = {
-        userId: userProfile.userId,
-        surveyStatus: "COMPLETE",
-      };
-      await UpdateSurveyStatus(statusObject);
-      console.log("Competed Survey");
-    }
-    if (currentQuestion.sequenceNumber === 1) {
-      statusObject = {
-        userId: userProfile.userId,
-        surveyStatus: "IN-PROGRESS",
-      };
-      await UpdateSurveyStatus(statusObject);
-      console.log("Survey in progress");
-    }
+    //setUserResponse(tempResponse);
+
     //props.nextOne(question.sequenceNumber + 1);
   }
+
   function handleInputText(e) {
     e.persist();
     console.log(e.target.value);
@@ -187,6 +224,19 @@ function TakeSurvey() {
   const RenderQuestionStatement = () => {
     return (
       <>
+        {existingQuestion ? (
+          <>
+            <Badge color="success" pill>
+              Pending Submission
+            </Badge>{" "}
+          </>
+        ) : (
+          <>
+            <Badge color="warning" pill>
+              You have responded to this question already.
+            </Badge>{" "}
+          </>
+        )}
         <div>
           <h2>{currentQuestion.questionText}</h2>
 
@@ -362,7 +412,9 @@ function TakeSurvey() {
                     </h4>
                     <Button
                       color="danger"
-                      onClick={() => setShowQuestion(true)}
+                      onClick={() => {
+                        setShowQuestion(true);
+                      }}
                     >
                       Take Survey
                     </Button>{" "}
