@@ -8,26 +8,21 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AboutPage from "views/examples/AboutPage";
 import AdminQuestioons from "views/examples/AdminQuestioons";
 import CommunityPage from "views/examples/CommunityPage";
+import ContactPage from "views/examples/ContactPage";
 //import DashBoard from "views/examples/DashBoard";
 import HomePage from "views/examples/HomePage";
 import LandingPage from "views/examples/LandingPage.js";
 import LoginPage from "views/examples/LoginPage";
 import ProfilePage from "views/examples/ProfilePage.js";
 //import ProfilePageUpdate from "views/examples/ProfilePageUpdate.js";
-
 import RegisterPage from "views/examples/RegisterPage.js";
-import SurveyPage from "views/examples/SurveyPage";
-import UserSurveyPage from "views/user/UserSurveyPage";
-import SurveySession from "components/Forms/SurveySession";
-import SurveyFeed from "components/Forms/SurveyFeed";
+import TimeLinePage from "views/examples/TimeLine";
 // pages
 import Index from "views/Index.js";
+import TakeSurvey from "views/user/TakeSurvey";
 import { UpdateProfilePage } from "views/user/UpdateProfilePage";
-import ContactPage from "views/examples/ContactPage";
 // others
 import AuthenticationPage from "./views/examples/AuthenticationPage";
-import SurveyQuestion from "views/examples/SurveyQuestion";
-import TakeSurvey from "views/user/TakeSurvey";
 
 function App() {
   return (
@@ -37,6 +32,7 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/about" render={(props) => <AboutPage {...props} />} />
         <Route path="/contact" component={ContactPage} />
+        <Route path="/timeline" component={TimeLinePage} />
 
         <Route
           path="/community"
@@ -49,13 +45,13 @@ function App() {
         />
         <Route path="/user/survey" component={TakeSurvey} />
 
+        {/* 
         <Route path="/proto/survey" component={SurveyPage} />
 
         <Route path="/user/session" component={SurveySession} />
         <Route path="/user/survey/:id" component={UserSurveyPage} />
         <Route path="/user/test/:id" component={SurveyFeed} />
         <Route path="/user/question/:id" component={SurveyQuestion} />
-        {/* 
         <Route path="/update-profile" render={(props) => <UpdateProfilePage {...props} />}/>
         <Route path="/editprofile" component={ProfilePageUpdate} />
         */}

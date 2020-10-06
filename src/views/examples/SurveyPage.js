@@ -5,7 +5,6 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import { GetAllQuestions } from "helpers/getAllQuestions";
 import { GetCurrentUser, GetCurrentUserprofile } from "helpers/getCurrentUser";
 import React, { useEffect, useState } from "react";
-import { createGlobalState } from "react-hooks-global-state";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -18,8 +17,6 @@ import {
   Modal,
 } from "reactstrap";
 
-//GLOBAL STATE
-const initialState = { count: 0 };
 function SurveyPage() {
   const currentQuestionState = {
     previous: -1,
@@ -35,7 +32,7 @@ function SurveyPage() {
     Questions[questNumber]
   );
 
-  const [openQuestionModal, setOpenModal] = useState(false);
+  //const [openQuestionModal, setOpenModal] = useState(false);
   const [showPolicy, setShowPolicy] = useState(false);
   Questions.sort(
     (a, b) => parseInt(a.sequenceNumber) - parseInt(b.sequenceNumber)

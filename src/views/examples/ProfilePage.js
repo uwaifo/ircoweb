@@ -4,6 +4,7 @@ import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import CompleteProfileModal from "components/Modal/CompleteProfile";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+//import { GetCurrentUser, GetCurrentUserprofile } from "helpers/getCurrentUser";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -14,8 +15,10 @@ import {
   CardTitle,
   Col,
   Container,
+  Modal,
   Row,
 } from "reactstrap";
+import { EditProfilePage } from "views/user/EditProfilePage";
 
 //import { UpdateProfilePage } from "views/user/UpdateProfilePage";
 
@@ -29,6 +32,8 @@ function ProfilePage() {
   const [user, setUser] = useState({});
   const [userProfile, setUserProfile] = useState({});
 
+  const [EditProfile, showEditProfile] = useState(false);
+
   //TODO First we check that the user from Cognito
   async function checkUser() {
     try {
@@ -40,6 +45,12 @@ function ProfilePage() {
       const response = await fetch(`${userApi}/${data.username}`);
       const jsonResponse = await response.json();
       setUserProfile(jsonResponse);
+
+      /*
+      const data = await GetCurrentUser();
+      const userInfo = await GetCurrentUserprofile(data);
+      setUserProfile(userInfo);
+      */
 
       //console.log("profile : ", jsonResponse);
     } catch (err) {
@@ -101,7 +112,8 @@ function ProfilePage() {
                         <p>Address Information</p>
                         <br />
                         <Button
-                          href="/editprofile"
+                          onClick={() => showEditProfile(true)}
+                          //href="/editprofile"
                           className="btn-round"
                           color="default"
                           outline
@@ -120,6 +132,53 @@ function ProfilePage() {
                         </Button>
                       </Col>
                     </Row>
+                    <Modal
+                      isOpen={EditProfile}
+                      className="modal-lg"
+                      modalClassName="bd-example-modal-lg"
+                      toggle={() => showEditProfile(false)}
+                    >
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLiveLabel">
+                          Take a moment to update your profile{" "}
+                        </h5>
+                        <button
+                          aria-label="Close"
+                          className="close"
+                          data-dismiss="modal"
+                          type="button"
+                          onClick={() => showEditProfile(false)}
+                        >
+                          <span aria-hidden={true}>×</span>
+                        </button>
+                      </div>
+                      <div className="modal-body"></div>
+                      <EditProfilePage />
+                      <div className="modal-footer">
+                        <div className="left-side">
+                          <Button
+                            className="btn-link"
+                            color="default"
+                            data-dismiss="modal"
+                            type="button"
+                            onClick={() => showEditProfile(false)}
+                          >
+                            Never mind
+                          </Button>
+                        </div>
+                        <div className="divider" />
+                        <div className="right-side">
+                          <Button
+                            className="btn-link"
+                            color="danger"
+                            type="button"
+                            onClick={() => showEditProfile(false)}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </div>
+                    </Modal>
                   </>
                 );
               } else {

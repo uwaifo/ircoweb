@@ -1,33 +1,26 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import DemoFooter from "components/Footers/DemoFooter.js";
+import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
+import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
+import React, { useEffect, useState } from "react";
 import {
+  Container,
   //Button,
   FormGroup,
-  Label,
   Input,
+  Label,
   Pagination,
   PaginationItem,
   PaginationLink,
-  Container,
 } from "reactstrap";
-
 import { GetCurrentUser } from "../../helpers/getCurrentUser";
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
-import DemoFooter from "components/Footers/DemoFooter.js";
-import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
+
 const questionsUrl =
   "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/questions";
 const singleQuestionUrl =
   "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/question";
-const submitUrl =
-  "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user/survey";
+
 function SurveySession() {
   let userSurveyObj = [];
-  const initialResponse = {
-    questionId: "",
-    userId: "",
-    response: [],
-  };
 
   const paginationState = {
     previous: -1,

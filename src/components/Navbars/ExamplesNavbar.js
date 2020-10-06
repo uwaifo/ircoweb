@@ -102,7 +102,7 @@ function ExamplesNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="#" tag={Link}>
+              <NavLink to="/timeline" tag={Link}>
                 <i className="" /> Time Line
               </NavLink>
             </NavItem>

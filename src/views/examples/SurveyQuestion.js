@@ -1,10 +1,10 @@
+import DemoFooter from "components/Footers/DemoFooter.js";
+import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
+import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
 import React, { useEffect, useState } from "react";
 //import axios from "axios";
 import { Container } from "reactstrap";
 import { GetCurrentUser } from "../../helpers/getCurrentUser";
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
-import DemoFooter from "components/Footers/DemoFooter.js";
-import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 function SurveyQuestion() {
   const [currentUser, setSessionUser] = useState({});
 
@@ -15,7 +15,6 @@ function SurveyQuestion() {
     const user = await GetCurrentUser();
     setSessionUser(user);
     //console.log(currentUser);
-    
   };
 
   return (

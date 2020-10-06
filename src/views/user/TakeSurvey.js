@@ -116,7 +116,7 @@ function TakeSurvey() {
     tempResponse.push(newResponse);
 
     //setUserResponse(tempResponse);
-    //await SendSelectedResponse(newResponse);
+    await SendSelectedResponse(newResponse);
     console.log("new : ", newResponse);
 
     console.log("TEMP : ", tempResponse);
@@ -129,7 +129,7 @@ function TakeSurvey() {
         userId: userProfile.userId,
         surveyStatus: "COMPLETE",
       };
-      //await UpdateSurveyStatus(statusObject);
+      await UpdateSurveyStatus(statusObject);
       console.log("Competed Survey");
     }
     if (currentQuestion.sequenceNumber === 1) {
@@ -137,7 +137,7 @@ function TakeSurvey() {
         userId: userProfile.userId,
         surveyStatus: "IN-PROGRESS",
       };
-      //await UpdateSurveyStatus(statusObject);
+      await UpdateSurveyStatus(statusObject);
       console.log("Survey in progress");
     }
     //props.nextOne(question.sequenceNumber + 1);
@@ -405,7 +405,7 @@ function TakeSurvey() {
                           );
                         } else if (
                           currentQuestion &&
-                          userProfile != "COMPLETE"
+                          userProfile !== "COMPLETE"
                         ) {
                           return (
                             <>

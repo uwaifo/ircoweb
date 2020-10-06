@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // reactstrap components
 import {
   Container,
@@ -16,11 +16,7 @@ function CurrentQuestionModal(props) {
     userId: "",
     response: [],
   };
-  let newResponse = {
-    questionId: "",
-    userId: "",
-    response: [],
-  };
+
   const [responseOption, setResponseOption] = useState(initialResponse);
   const [newResp, setNewResp] = useState({});
   const [tempResponse, setTempResponse] = useState([]);
