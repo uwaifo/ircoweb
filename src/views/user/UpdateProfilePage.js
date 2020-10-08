@@ -14,6 +14,7 @@ import {
   Row,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import ListStates from "helpers/listStates";
 
 export const UpdateProfilePage = (props) => {
   //let today = new Date();
@@ -44,6 +45,7 @@ export const UpdateProfilePage = (props) => {
 
       //const jsonUpdateResponse = await updateResponse.json();
       console.log(updateResponse);
+      closeModel();
     } catch (error) {
       console.log(error);
     }
@@ -196,9 +198,7 @@ export const UpdateProfilePage = (props) => {
                           id="exampleSelect1"
                           onChange={onChange}
                         >
-                          <option>Alabama - AL</option>
-                          <option>Alaska - AK</option>
-                          <option>Arizona - AZ</option>
+                          <ListStates />
                         </Input>
                       </InputGroup>
                     </Col>
@@ -212,7 +212,7 @@ export const UpdateProfilePage = (props) => {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          placeholder="Name"
+                          placeholder="Your City"
                           type="text"
                           name="city"
                           onChange={onChange}

@@ -2,6 +2,7 @@ import { Auth } from "aws-amplify";
 import axios from "axios";
 import { GetCurrentUserprofile } from "helpers/getCurrentUser";
 import { GetCurrentUser } from "helpers/getCurrentUser";
+import ListStates from "helpers/listStates";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -60,6 +61,8 @@ export const EditProfilePage = (props) => {
 
       //const jsonUpdateResponse = await updateResponse.json();
       console.log(updateResponse);
+      closeModel();
+      //closeModel();
     } catch (error) {
       console.log(error);
     }
@@ -198,9 +201,7 @@ export const EditProfilePage = (props) => {
                       id="exampleSelect1"
                       onChange={onChange}
                     >
-                      <option>Alabama - AL</option>
-                      <option>Alaska - AK</option>
-                      <option>Arizona - AZ</option>
+                      <ListStates />
                     </Input>
                   </InputGroup>
                 </Col>
@@ -214,7 +215,7 @@ export const EditProfilePage = (props) => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      placeholder="Name"
+                      placeholder="Your City"
                       type="text"
                       name="city"
                       //value={userProfile.address.city}
