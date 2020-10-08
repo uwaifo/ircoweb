@@ -3,6 +3,7 @@ import axios from "axios";
 import { GetCurrentUserprofile } from "helpers/getCurrentUser";
 import { GetCurrentUser } from "helpers/getCurrentUser";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   Col,
@@ -15,11 +16,13 @@ import {
   Row,
 } from "reactstrap";
 
-export const EditProfilePage = () => {
+export const EditProfilePage = (props) => {
   //let today = new Date();
   //today = today.toLocaleDateString();
 
   const [userProfile, setUserProfile] = useState({});
+  const [isOpen, setIsOpen] = useState(props.isOpen);
+  console.log("MODAL IS : ", isOpen);
   //const [address, setAddress] = useState(initialProfile.address);
   //const [submitted, setSubmitted] = useState(false);
 
@@ -33,6 +36,7 @@ export const EditProfilePage = () => {
   }*/
   useEffect(() => {
     checkUser();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -84,6 +88,12 @@ export const EditProfilePage = () => {
     }
 
     console.log(userProfile);
+  }
+
+  function closeModel() {
+    setIsOpen(false);
+
+    props.onChange(isOpen);
   }
 
   return (
@@ -177,7 +187,6 @@ export const EditProfilePage = () => {
                   </InputGroup>
                 </Col>
               </Row>
-
               <Row>
                 <Col md="6">
                   <label>State </label>
@@ -214,15 +223,20 @@ export const EditProfilePage = () => {
                   </InputGroup>
                 </Col>
               </Row>
-
               <Button
                 className="btn-fill"
-                color="danger"
+                color="success"
                 size="lg"
                 onClick={updateUserProfile}
               >
                 Update Profile
               </Button>
+              &nbsp; &nbsp;
+              <Link to="#">
+                <Button size="lg" color="danger" onClick={closeModel}>
+                  Skip for now {isOpen}
+                </Button>
+              </Link>{" "}
             </Form>
           </Col>
         </Row>

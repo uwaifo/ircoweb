@@ -226,15 +226,23 @@ function TakeSurvey() {
       <>
         {existingQuestion ? (
           <>
-            <Badge color="success" pill>
+            {/*<Badge color="success" pill>
               Pending Submission
             </Badge>{" "}
+            */}
           </>
         ) : (
           <>
+            <img
+              alt="..."
+              width="40"
+              height="40"
+              src={require("assets/img/completed_one.png")}
+            />
+            {/*
             <Badge color="warning" pill>
               You have responded to this question already.
-            </Badge>{" "}
+            </Badge>{" "}*/}
           </>
         )}
         <div>
@@ -398,9 +406,9 @@ function TakeSurvey() {
               <>
                 <Card>
                   <CardHeader>
-                    <h2 className="title">
+                    {/*<h2 className="title">
                       Hello {userProfile.firstName} {userProfile.lastName} !
-                    </h2>
+                    </h2>*/}
                     <h3 className="title">
                       Please Give Us A Moment Of Your time.
                     </h3>

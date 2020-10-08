@@ -26,31 +26,12 @@ function UpdateProfileModal() {
           </button>
         </div>
         <div className="modal-body">
-          <UpdateProfilePage />
-        </div>
-        <div className="modal-footer">
-          <div className="left-side">
-            <Button
-              className="btn-link"
-              color="default"
-              data-dismiss="modal"
-              type="button"
-              onClick={() => setLiveDemo(false)}
-            >
-              Never mind
-            </Button>
-          </div>
-          <div className="divider" />
-          <div className="right-side">
-            <Button
-              className="btn-link"
-              color="danger"
-              type="button"
-              onClick={() => setLiveDemo(false)}
-            >
-              Delete
-            </Button>
-          </div>
+          <UpdateProfilePage
+            isOpen={liveDemo}
+            onChange={(arg) => {
+              setLiveDemo(arg);
+            }}
+          />
         </div>
       </Modal>
     </>

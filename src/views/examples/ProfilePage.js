@@ -19,6 +19,7 @@ import {
   Row,
 } from "reactstrap";
 import { EditProfilePage } from "views/user/EditProfilePage";
+import { UpdateProfilePage } from "views/user/UpdateProfilePage";
 
 //import { UpdateProfilePage } from "views/user/UpdateProfilePage";
 
@@ -31,6 +32,8 @@ function ProfilePage() {
   }, []);
   const [user, setUser] = useState({});
   const [userProfile, setUserProfile] = useState({});
+
+  const [CompleteProfile, showCompleteProfile] = useState(false);
 
   const [EditProfile, showEditProfile] = useState(false);
 
@@ -81,7 +84,12 @@ function ProfilePage() {
           if (userProfile.profileStatus === false) {
             return (
               <>
-                <CompleteProfileModal />
+                <UpdateProfilePage
+                  isOpen={CompleteProfile}
+                  onChange={(arg) => {
+                    showCompleteProfile(arg);
+                  }}
+                />
               </>
             );
           }
@@ -152,31 +160,13 @@ function ProfilePage() {
                           <span aria-hidden={true}>×</span>
                         </button>
                       </div>
-                      <div className="modal-body"></div>
-                      <EditProfilePage />
-                      <div className="modal-footer">
-                        <div className="left-side">
-                          <Button
-                            className="btn-link"
-                            color="default"
-                            data-dismiss="modal"
-                            type="button"
-                            onClick={() => showEditProfile(false)}
-                          >
-                            Never mind
-                          </Button>
-                        </div>
-                        <div className="divider" />
-                        <div className="right-side">
-                          <Button
-                            className="btn-link"
-                            color="danger"
-                            type="button"
-                            onClick={() => showEditProfile(false)}
-                          >
-                            Delete
-                          </Button>
-                        </div>
+                      <div className="modal-body">
+                        <EditProfilePage
+                          isOpen={EditProfile}
+                          onChange={(arg) => {
+                            showEditProfile(arg);
+                          }}
+                        />
                       </div>
                     </Modal>
                   </>
