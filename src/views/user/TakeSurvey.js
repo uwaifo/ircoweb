@@ -130,6 +130,11 @@ function TakeSurvey() {
   }
 
   //TRIGGERS
+
+  function handlePrevious() {
+    setQuestNumber(questNumber - 1);
+    setSurveyProgress(questNumber);
+  }
   async function handleNext() {
     //tempResponse.push(newResponse);
     if (currentQuestion.questionType === "MULTIPLE-CHOICE") {
@@ -364,14 +369,37 @@ function TakeSurvey() {
             })()}
             <>
               <Pagination>
-                <PaginationItem className="disabled">
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Previous
-                  </PaginationLink>
-                </PaginationItem>
+                {(function() {
+                  if (questNumber > 1) {
+                    return (
+                      <PaginationItem>
+                        <PaginationLink
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handlePrevious();
+                          }}
+                        >
+                          Previous
+                        </PaginationLink>
+                      </PaginationItem>
+                    );
+                  } else {
+                    //currentQuestion.sequenceNumber
+                    return (
+                      <PaginationItem className="disabled">
+                        <PaginationLink
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                          }}
+                        >
+                          Previous
+                        </PaginationLink>
+                      </PaginationItem>
+                    );
+                  }
+                })()}
                 &nbsp; &nbsp;
                 <PaginationItem>
                   <PaginationLink
