@@ -22,3 +22,7 @@ export async function GetCurrentUserprofile(userData) {
     console.log("error: ", error);
   }
 }
+
+export async function LogoutUser() {
+  Auth.signOut();
+}

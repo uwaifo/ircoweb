@@ -112,6 +112,7 @@ function ProfilePage() {
                         <h4 className="title">
                           {userProfile.firstName} {userProfile.lastName} <br />
                         </h4>
+                        <h4>{userProfile.userRole}</h4>
                         <h6 className="description">{userProfile.email}</h6>
                       </div>
                     </div>

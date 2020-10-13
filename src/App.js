@@ -6,11 +6,13 @@ import ListQuestions from "components/DashBoard/ListQuestions";
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AboutPage from "views/examples/AboutPage";
+import AdminPage from "views/examples/AdminPage";
 import AdminQuestioons from "views/examples/AdminQuestioons";
 import CommunityPage from "views/examples/CommunityPage";
 import ContactPage from "views/examples/ContactPage";
 //import DashBoard from "views/examples/DashBoard";
 import HomePage from "views/examples/HomePage";
+import InvestorPage from "views/examples/Investor";
 import LandingPage from "views/examples/LandingPage.js";
 import LoginPage from "views/examples/LoginPage";
 import ProfilePage from "views/examples/ProfilePage.js";
@@ -33,6 +35,8 @@ function App() {
         <Route path="/about" render={(props) => <AboutPage {...props} />} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/timeline" component={TimeLinePage} />
+        <Route path="/investor" component={InvestorPage} />
+        <Route path="/admin" component={AdminPage} />
 
         <Route
           path="/community"
