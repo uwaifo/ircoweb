@@ -16,8 +16,8 @@ const awsmobile = {
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "http://localhost:9900/auth/",
-        "redirectSignOut": "http://localhost:9900/auth/",
+        "redirectSignIn": "http://localhost:9900/auth/,https://www.ircofflorida.com/auth/",
+        "redirectSignOut": "http://localhost:9900/auth/,https://www.ircofflorida.com/auth/",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS",

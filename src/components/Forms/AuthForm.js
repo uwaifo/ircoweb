@@ -209,7 +209,7 @@ function AuthForm() {
               className="btn-round"
               onClick={() => Auth.federatedSignIn({ provider: "Google" })}
             >
-              <i className="fa fa-google" />| Sign in with Google
+              <i className="fa fa-google fa-lg" /> Sign in with Google
             </Button>
 
             <Label></Label>
