@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "ircocom60e2ad3e_identitypool_60e2ad3e",
+    "identityPoolName": "ircocomcab3ca6d_identitypool_cab3ca6d",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ircoco60e2ad3e",
-    "userPoolName": "ircocom60e2ad3e_userpool_60e2ad3e",
+    "resourceNameTruncated": "ircococab3ca6d",
+    "userPoolName": "ircocomcab3ca6d_userpool_cab3ca6d",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "ircoco60e2ad3e_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "ircococab3ca6d_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "60e2ad3e",
-    "resourceName": "ircocom60e2ad3e",
+    "sharedId": "cab3ca6d",
+    "resourceName": "ircocomcab3ca6d",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -45,10 +45,17 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "defaultSocial",
+    "hostedUI": true,
     "usernameAttributes": [
         "email"
     ],
+    "hostedUIDomainName": "ircocomcab3ca6d-cab3ca6d",
+    "authProvidersUserPool": [
+        "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:9900/auth/\"],\"LogoutURLs\":[\"http://localhost:9900/auth/\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "dependsOn": []

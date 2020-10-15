@@ -3,11 +3,24 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-1",
-    "aws_cognito_identity_pool_id": "us-east-1:fae05f14-cdac-4cbb-ae02-80e130ce02ea",
+    "aws_cognito_identity_pool_id": "us-east-1:c8e761ec-54af-4f59-a018-b8f4c48286e2",
     "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_0CAlPPUJ9",
-    "aws_user_pools_web_client_id": "4chr36d34rgsl6uu4aurc5fhs6",
-    "oauth": {},
+    "aws_user_pools_id": "us-east-1_w3gFNPDZD",
+    "aws_user_pools_web_client_id": "38jtpisna7jeg3hkf7oka13vvj",
+    "oauth": {
+        "domain": "ircocomcab3ca6d-cab3ca6d-dev.auth.us-east-1.amazoncognito.com",
+        "scope": [
+            "phone",
+            "email",
+            "openid",
+            "profile",
+            "aws.cognito.signin.user.admin"
+        ],
+        "redirectSignIn": "http://localhost:9900/auth/",
+        "redirectSignOut": "http://localhost:9900/auth/",
+        "responseType": "code"
+    },
+    "federationTarget": "COGNITO_USER_POOLS",
     "aws_content_delivery_bucket": "ircocom-20200924223736-hostingbucket-dev",
     "aws_content_delivery_bucket_region": "us-east-1",
     "aws_content_delivery_url": "https://d1y15trwqltue4.cloudfront.net"

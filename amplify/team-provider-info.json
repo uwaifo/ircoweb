@@ -13,7 +13,9 @@
     },
     "categories": {
       "auth": {
-        "ircocom60e2ad3e": {}
+        "ircocomcab3ca6d": {
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"247502257356-g1juioctnsoeqpeooh5be9529ep6ft5d.apps.googleusercontent.com\",\"client_secret\":\"cPlL0OnIDwfwVBOXBb0Hnnwc\"}]"
+        }
       }
     }
   }

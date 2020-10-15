@@ -1,6 +1,6 @@
 {
   "auth": {
-    "ircocom60e2ad3e": {
+    "ircocomcab3ca6d": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

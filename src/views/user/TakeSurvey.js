@@ -43,7 +43,11 @@ function TakeSurvey() {
   //STATES
   const [userProfile, setUserProfile] = useState({});
   const [Questions, setQuestions] = useState([]);
-  const [questNumber, setQuestNumber] = useState(0);
+  const [progressPosition, setProgressPosition] = useState(0);
+
+  const [questNumber, setQuestNumber] = useState(progressPosition);
+  //const [questNumber, setQuestNumber] = useState(0);
+
   const [ShowQuestion, setShowQuestion] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(
     Questions[questNumber]
@@ -86,12 +90,26 @@ function TakeSurvey() {
     //console.log("survey position : ", surveyProgress);
   }, [surveyProgress]);
 
+  useEffect(() => {
+    userPosittion();
+  });
+
+  async function userPosittion() {
+    try {
+      setProgressPosition(userProfile.surveyResponse.length + 1);
+      console.log("Last Position : ", progressPosition);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   //USE EFFECT FUNCTIONS
   async function checkUser() {
     try {
       const data = await GetCurrentUser();
       const userInfo = await GetCurrentUserprofile(data);
-      setUserProfile(userInfo);
+      //setUserProfile(userInfo);
+      setQuestNumber(userInfo.surveyResponse.length + 1);
     } catch (err) {
       console.log("error: ", err);
     }
@@ -108,6 +126,7 @@ function TakeSurvey() {
 
   function presentQuestion() {
     setCurrentQuestion(Questions[questNumber]);
+    //setCurrentQuestion(Questions[progressPosition]);
   }
 
   async function checkIfAttempted() {

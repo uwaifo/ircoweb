@@ -1,9 +1,14 @@
 //import React from "react";
 import { Auth, Hub } from "aws-amplify";
+import { GoogleLogin } from "react-google-login";
 import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Button, Form, Input, Label } from "reactstrap";
 //const url = "https://ighv7u15x9.execute-api.us-east-1.amazonaws.com/dev/user";
+
+//https://ircocomd3dcbed3-d3dcbed3-dev.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=4chr36d34rgsl6uu4aurc5fhs6&redirect_uri=https://www.ircofflorida.com
+const clientId =
+  "247502257356-g1juioctnsoeqpeooh5be9529ep6ft5d.apps.googleusercontent.com";
 const initialFormState = {
   username: "",
   email: "",
@@ -36,6 +41,10 @@ function AuthForm() {
       }
     });
   }
+
+  const responseGoogle = (resp) => {
+    console.log(resp);
+  };
 
   async function checkUser() {
     try {
@@ -194,6 +203,15 @@ function AuthForm() {
             >
               Sign In
             </Button>
+            <Button
+              block
+              color="info"
+              className="btn-round"
+              onClick={() => Auth.federatedSignIn({ provider: "Google" })}
+            >
+              <i className="fa fa-google" />| Sign in with Google
+            </Button>
+
             <Label></Label>
             <div className="forgot">
               <h6>Do not have an account?</h6>

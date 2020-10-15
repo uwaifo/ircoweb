@@ -26,3 +26,5 @@ export async function GetCurrentUserprofile(userData) {
 export async function LogoutUser() {
   Auth.signOut();
 }
+
+export async function GetProgressPosition() {}
